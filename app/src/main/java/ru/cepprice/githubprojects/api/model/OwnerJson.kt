@@ -1,4 +1,4 @@
-package ru.cepprice.githubprojects.api
+package ru.cepprice.githubprojects.api.model
 
 data class OwnerJson(
     val avatar_url: String,

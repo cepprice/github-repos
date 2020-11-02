@@ -1,4 +1,4 @@
-package ru.cepprice.githubprojects.api
+package ru.cepprice.githubprojects.api.model
 
 data class RepoJson(
     val archive_url: String,
