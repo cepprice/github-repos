@@ -6,7 +6,7 @@ import ru.cepprice.githubprojects.api.model.AccessToken
 import ru.cepprice.githubprojects.api.model.RepoJson
 
 
-interface GitHubAuthApi {
+interface AuthGitHubApi {
 
     @Headers("Accept: application/json")
     @FormUrlEncoded
