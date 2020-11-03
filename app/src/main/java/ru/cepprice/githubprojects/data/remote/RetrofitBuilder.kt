@@ -1,4 +1,4 @@
-package ru.cepprice.githubprojects.api
+package ru.cepprice.githubprojects.data.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,4 +1,4 @@
-package ru.cepprice.githubprojects.api.model
+package ru.cepprice.githubprojects.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 

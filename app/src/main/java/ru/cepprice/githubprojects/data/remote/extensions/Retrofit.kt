@@ -1,4 +1,4 @@
-package ru.cepprice.githubprojects.api.extensions
+package ru.cepprice.githubprojects.data.remote.extensions
 
 import retrofit2.Call
 import retrofit2.Callback

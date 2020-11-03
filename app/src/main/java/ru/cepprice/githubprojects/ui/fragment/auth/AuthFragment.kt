@@ -17,9 +17,9 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import ru.cepprice.githubprojects.BuildConfig
 import ru.cepprice.githubprojects.R
-import ru.cepprice.githubprojects.api.RetrofitBuilder
-import ru.cepprice.githubprojects.api.model.AccessToken
-import ru.cepprice.githubprojects.api.extensions.enqueue
+import ru.cepprice.githubprojects.data.remote.RetrofitBuilder
+import ru.cepprice.githubprojects.data.remote.model.AccessToken
+import ru.cepprice.githubprojects.data.remote.extensions.enqueue
 import ru.cepprice.githubprojects.ui.extensions.navigateToReposListFragment
 
 class AuthFragment : Fragment() {

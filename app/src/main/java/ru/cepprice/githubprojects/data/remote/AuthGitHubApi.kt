@@ -1,9 +1,8 @@
-package ru.cepprice.githubprojects.api
+package ru.cepprice.githubprojects.data.remote
 
 import retrofit2.Call
 import retrofit2.http.*
-import ru.cepprice.githubprojects.api.model.AccessToken
-import ru.cepprice.githubprojects.api.model.RepoJson
+import ru.cepprice.githubprojects.data.remote.model.AccessToken
 
 
 interface AuthGitHubApi {
