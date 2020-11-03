@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">GitHub Projects</string>
+
+
+    <!-- Strings for RepoView   -->
+    <!-- Branches   -->
+    <string name="tv_repo_branch_one">branch</string>
+    <string name="tv_repo_branch_many">branches</string>
+    <!-- Tags  -->
+    <string name="tv_repo_tag_zero">tags</string>
+    <string name="tv_repo_tag_one">tag</string>
+    <string name="tv_repo_tag_many">tags</string>
+    <!-- Watch  -->
+    <string name="tv_repo_watch">Watch</string>
+    <!-- Star  -->
+    <string name="tv_repo_star">Star</string>
+    <!-- Fork  -->
+    <string name="tv_repo_fork">Fork</string>
+
+
+    <!-- Strings for layout tools  -->
+    <string name="tv_repo_name_long">This is a very long name of GitHub repository</string>
 </resources>
