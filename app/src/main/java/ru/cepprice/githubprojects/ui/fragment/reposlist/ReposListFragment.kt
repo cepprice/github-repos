@@ -1,4 +1,4 @@
-package ru.cepprice.githubprojects.ui.fragment
+package ru.cepprice.githubprojects.ui.fragment.reposlist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

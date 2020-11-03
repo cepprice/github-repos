@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/authFragment"
-        android:name="ru.cepprice.githubprojects.ui.fragment.AuthFragment"
+        android:name="ru.cepprice.githubprojects.ui.fragment.auth.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/reposListFragment"
-        android:name="ru.cepprice.githubprojects.ui.fragment.ReposListFragment"
+        android:name="ru.cepprice.githubprojects.ui.fragment.reposlist.ReposListFragment"
         android:label="fragment_repos_list"
         tools:layout="@layout/fragment_repos_list" >
         <argument

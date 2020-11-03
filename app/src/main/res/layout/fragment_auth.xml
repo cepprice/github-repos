@@ -4,7 +4,7 @@
     android:id="@+id/fl_auth_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.AuthFragment">
+    tools:context=".ui.fragment.auth.AuthFragment">
 
     <WebView
         android:id="@+id/wv_auth"

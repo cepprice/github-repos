@@ -1,4 +1,4 @@
-package ru.cepprice.githubprojects.ui.fragment
+package ru.cepprice.githubprojects.ui.fragment.auth
 
 import android.graphics.Bitmap
 import android.os.Bundle
