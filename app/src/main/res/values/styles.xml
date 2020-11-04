@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -7,4 +7,38 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Style of LinearLayout that contains info about one of these:
+         Watch, Star, Fork -->
+    <style name="LinearLayoutInfo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/border_linear_layout</item>
+    </style>
+
+    <!-- Style of TextView of "Watch", "Star", "Fork" captions -->
+    <style name="TextViewCaption">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_tiny_4</item>
+        <item name="android:layout_marginRight">@dimen/spacing_normal_16</item>
+    </style>
+
+    <!-- Style of ImageView "Watch", "Star", "Fork" icons -->
+    <style name="ImageViewIcon">
+        <item name="android:layout_width">@dimen/svg_width_size_16</item>
+        <item name="android:layout_height">@dimen/svg_height_size_16</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
+    </style>
+
+    <!-- Style of TextView of "Watch", "Star", "Fork" number -->
+    <style name="TextViewNumber" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
+        <item name="android:layout_marginRight">@dimen/spacing_normal_16</item>
+    </style>
 </resources>
