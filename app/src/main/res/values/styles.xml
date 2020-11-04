@@ -7,38 +7,52 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- Style of LinearLayout that contains info about one of these:
-         Watch, Star, Fork -->
-    <style name="LinearLayoutInfo">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">32dp</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:background">@drawable/border_linear_layout</item>
-    </style>
 
-    <!-- Style of TextView of "Watch", "Star", "Fork" captions -->
-    <style name="TextViewCaption">
+    <!-- Style of ConstraintLayout that contains info about one of these:
+         Watch, Star, Fork -->
+    <style name="ConstraintLayoutPopularity">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:layout_marginLeft">@dimen/spacing_tiny_4</item>
-        <item name="android:layout_marginRight">@dimen/spacing_normal_16</item>
+        <item name="android:layout_height">@dimen/cl_popularity_height_size_32</item>
+        <item name="android:layout_marginTop">@dimen/spacing_small_8</item>
     </style>
 
     <!-- Style of ImageView "Watch", "Star", "Fork" icons -->
     <style name="ImageViewIcon">
         <item name="android:layout_width">@dimen/svg_width_size_16</item>
         <item name="android:layout_height">@dimen/svg_height_size_16</item>
-        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintLeft_toLeftOf">parent</item>
+    </style>
+
+    <!-- Style of TextView of "Watch", "Star", "Fork" captions -->
+    <style name="TextViewCaption">
+        <item name="android:layout_width">@dimen/tv_popularity_width_size_40</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_tiny_4</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
+    <!-- Style for vertical line -->
+    <style name="VerticalLine">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
     </style>
 
     <!-- Style of TextView of "Watch", "Star", "Fork" number -->
-    <style name="TextViewNumber" parent="TextAppearance.AppCompat">
-        <item name="android:layout_width">wrap_content</item>
+    <style name="TextViewNumber">
+        <item name="android:layout_width">@dimen/tv_popularity_width_size_40</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textAlignment">center</item>
         <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
         <item name="android:layout_marginRight">@dimen/spacing_normal_16</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintRight_toRightOf">parent</item>
     </style>
+
 </resources>
