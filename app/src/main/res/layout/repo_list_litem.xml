@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+r<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_normal_16"
+    android:background="@drawable/border_for_cl"
+    android:padding="@dimen/spacing_small_8">
+
+    <!-- TODO it can be fork -->
+    <ImageView
+        android:id="@+id/iv_publicity"
+        android:layout_width="@dimen/icon_size_24"
+        android:layout_height="@dimen/icon_size_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_public" />
+
+    <TextView
+        android:id="@+id/tv_repo_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/spacing_small_8"
+        android:layout_marginRight="@dimen/spacing_small_8"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text=""
+        android:textSize="@dimen/font_large_20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_publicity"
+        app:layout_constraintEnd_toStartOf="@+id/cl_watch"
+        app:layout_constraintStart_toEndOf="@+id/iv_publicity"
+        app:layout_constraintTop_toTopOf="@+id/iv_publicity"
+        tools:text="bootstrap" />
+
+    <TextView
+        android:id="@+id/tv_updated_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:text="Edited"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_publicity" />
+
+    <ImageView
+        android:id="@+id/iv_branch"
+        android:layout_width="@dimen/icon_size_20"
+        android:layout_height="@dimen/icon_size_20"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:src="@drawable/ic_branch"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_updated_caption" />
+
+    <TextView
+        android:id="@+id/tv_branch_number"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="1"
+        android:textAlignment="center"
+        android:layout_marginLeft="@dimen/spacing_tiny_4"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_branch"
+        app:layout_constraintLeft_toRightOf="@+id/iv_branch"
+        app:layout_constraintTop_toTopOf="@+id/iv_branch" />
+
+    <TextView
+        android:id="@+id/tv_branch_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/tv_repo_branch_one"
+        android:layout_marginLeft="2dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_branch_number"
+        app:layout_constraintTop_toTopOf="@+id/tv_branch_number"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_branch_number" />
+
+    <ImageView
+        android:id="@+id/iv_tag"
+        android:layout_width="@dimen/icon_size_20"
+        android:layout_height="@dimen/icon_size_20"
+        android:src="@drawable/ic_tag"
+        android:layout_marginLeft="@dimen/spacing_small_8"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_branch_caption"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_branch_caption"
+        app:layout_constraintTop_toTopOf="@+id/tv_branch_caption" />
+
+    <TextView
+        android:id="@+id/tv_tag_number"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:layout_marginLeft="@dimen/spacing_tiny_4"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_tag"
+        app:layout_constraintLeft_toRightOf="@+id/iv_branch"
+        app:layout_constraintStart_toEndOf="@+id/iv_tag"
+        app:layout_constraintTop_toTopOf="@+id/iv_tag" />
+
+    <TextView
+        android:id="@+id/tv_tag_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/tv_repo_tag_zero"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_tag_number"
+        app:layout_constraintLeft_toRightOf="@+id/tv_branch_number"
+        app:layout_constraintStart_toEndOf="@+id/tv_tag_number"
+        app:layout_constraintTop_toTopOf="@+id/tv_tag_number" />
+
+    <!-- TODO: Add constraints from style if needed -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_watch"
+        style="@style/ConstraintLayoutPopularity"
+        android:background="@drawable/border_for_cl"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="13dp">
+
+        <ImageView
+            android:id="@+id/iv_watch"
+            style="@style/ImageViewIcon"
+            android:src="@drawable/ic_watch" />
+
+        <TextView
+            android:id="@+id/tv_watch_caption"
+            style="@style/TextViewCaption"
+            android:text="Watch"
+            app:layout_constraintLeft_toRightOf="@id/iv_watch" />
+
+        <View
+            android:id="@+id/vw_watch"
+            style="@style/VerticalLine"
+            android:background="@color/iron"
+            app:layout_constraintLeft_toRightOf="@id/tv_watch_caption" />
+
+        <TextView
+            android:id="@+id/tv_watch_number"
+            style="@style/TextViewNumber"
+            android:text="0"
+            app:layout_constraintLeft_toRightOf="@id/vw_watch" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_star"
+        style="@style/ConstraintLayoutPopularity"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:background="@drawable/border_for_cl"
+        app:layout_constraintRight_toRightOf="@id/cl_watch"
+        app:layout_constraintTop_toBottomOf="@id/cl_watch"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/iv_star"
+            style="@style/ImageViewIcon"
+            android:src="@drawable/ic_star" />
+
+        <TextView
+            android:id="@+id/tv_star_caption"
+            style="@style/TextViewCaption"
+            android:text="Star"
+            app:layout_constraintLeft_toRightOf="@id/iv_star" />
+
+        <View
+            android:id="@+id/vw_star"
+            style="@style/VerticalLine"
+            android:background="@color/iron"
+            app:layout_constraintLeft_toRightOf="@id/tv_star_caption" />
+
+        <TextView
+            android:id="@+id/tv_star_number"
+            style="@style/TextViewNumber"
+            android:text="0"
+            app:layout_constraintLeft_toRightOf="@id/vw_star" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_fork"
+        style="@style/ConstraintLayoutPopularity"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:background="@drawable/border_for_cl"
+        app:layout_constraintRight_toRightOf="@id/cl_star"
+        app:layout_constraintTop_toBottomOf="@id/cl_star"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/iv_fork"
+            style="@style/ImageViewIcon"
+            android:src="@drawable/ic_fork" />
+
+        <TextView
+            android:id="@+id/tv_fork_caption"
+            style="@style/TextViewCaption"
+            android:text="Fork"
+            app:layout_constraintLeft_toRightOf="@id/iv_fork" />
+
+        <View
+            android:id="@+id/vw_fork"
+            style="@style/VerticalLine"
+            android:background="@color/iron"
+            app:layout_constraintLeft_toRightOf="@id/tv_fork_caption" />
+
+        <TextView
+            android:id="@+id/tv_fork_number"
+            style="@style/TextViewNumber"
+            android:text="0"
+            app:layout_constraintLeft_toRightOf="@id/vw_fork" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
