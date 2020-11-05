@@ -14,10 +14,11 @@
     <dimen name="spacing_tiny_4">4dp</dimen>
 
     <!-- Element's sizes -->
-    <dimen name="svg_height_size_16">16dp</dimen>
-    <dimen name="svg_height_size_0">0dp</dimen>
-    <dimen name="svg_width_size_16">16dp</dimen>
-    
+    <dimen name="icon_size_24">24dp</dimen>
+    <dimen name="icon_size_20">20dp</dimen>
+    <dimen name="icon_size_16">16dp</dimen>
+
     <dimen name="cl_popularity_height_size_32">32dp</dimen>
     <dimen name="tv_popularity_width_size_40">40dp</dimen>
+
 </resources>
