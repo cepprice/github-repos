@@ -19,7 +19,7 @@
     <style name="ImageViewIcon">
         <item name="android:layout_width">@dimen/icon_size_16</item>
         <item name="android:layout_height">@dimen/icon_size_16</item>
-        <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_small_8</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
         <item name="layout_constraintBottom_toBottomOf">parent</item>
         <item name="layout_constraintLeft_toLeftOf">parent</item>
@@ -27,7 +27,7 @@
 
     <!-- Style of TextView of "Watch", "Star", "Fork" captions -->
     <style name="TextViewCaption">
-        <item name="android:layout_width">@dimen/tv_popularity_width_size_40</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/spacing_tiny_4</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
@@ -38,17 +38,16 @@
     <style name="VerticalLine">
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_small_8</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
     </style>
 
     <!-- Style of TextView of "Watch", "Star", "Fork" number -->
     <style name="TextViewNumber">
-        <item name="android:layout_width">@dimen/tv_popularity_width_size_40</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
-        <item name="android:layout_marginRight">@dimen/spacing_normal_16</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_small_8</item>
+        <item name="android:layout_marginRight">@dimen/spacing_small_8</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
         <item name="layout_constraintBottom_toBottomOf">parent</item>
         <item name="layout_constraintRight_toRightOf">parent</item>
