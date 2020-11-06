@@ -4,6 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="1dp"
     android:layout_height="match_parent"
-    android:background="@color/iron"
+    android:background="@color/grey_dark"
     android:layout_marginLeft="@dimen/spacing_normal_16"/>
 
