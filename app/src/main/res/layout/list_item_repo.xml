@@ -25,6 +25,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_repo_name"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:imageResource="@{repo.src}"
             tools:src="@drawable/ic_public"
             tools:ignore="ContentDescription" />
 
@@ -59,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/spacing_tiny_4"
-            android:text="@{repo.branchesCount}"
+            android:text="@{Integer.toString(repo.branchesCount)}"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/iv_branch"
             app:layout_constraintLeft_toRightOf="@+id/iv_branch"
@@ -92,7 +93,7 @@
             android:id="@+id/tv_tag_number"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:text="@{repo.tagsCount}"
+            android:text="@{Integer.toString(repo.tagsCount)}"
             android:textAlignment="center"
             android:layout_marginStart="@dimen/spacing_tiny_4"
             app:layout_constraintBottom_toBottomOf="@+id/iv_tag"
@@ -127,7 +128,7 @@
             android:id="@+id/tv_commit_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{repo.commitsCount}"
+            android:text="@{Integer.toString(repo.commitsCount)}"
             android:layout_marginStart="@dimen/spacing_tiny_4"
             app:layout_constraintLeft_toRightOf="@id/iv_commit"
             app:layout_constraintTop_toTopOf="@id/iv_commit"
@@ -198,7 +199,7 @@
             <TextView
                 android:id="@+id/tv_watch_number"
                 style="@style/TextViewNumber"
-                android:text="@{repo.watchersCount}"
+                android:text="@{Integer.toString(repo.watchersCount)}"
                 app:layout_constraintLeft_toRightOf="@id/vw_watch"
                 tools:text="145k" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -234,7 +235,7 @@
             <TextView
                 android:id="@+id/tv_star_number"
                 style="@style/TextViewNumber"
-                android:text="@{repo.starsCount}"
+                android:text="@{Integer.toString(repo.starsCount)}"
                 app:layout_constraintLeft_toRightOf="@id/vw_star"
                 tools:text="145k" />
 
@@ -271,7 +272,7 @@
             <TextView
                 android:id="@+id/tv_fork_number"
                 style="@style/TextViewNumber"
-                android:text="@{repo.forksCount}"
+                android:text="@{Integer.toString(repo.forksCount)}"
                 app:layout_constraintLeft_toRightOf="@id/vw_fork"
                 tools:text="145k" />
         </androidx.constraintlayout.widget.ConstraintLayout>
