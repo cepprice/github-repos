@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacing_small_8"
     android:background="@drawable/border_for_cl"
-    android:padding="@dimen/spacing_small_8">
+    android:padding="@dimen/spacing_small_8" >
 
     <!-- TODO it can be fork -->
     <ImageView
@@ -14,24 +14,25 @@
         android:layout_width="@dimen/icon_size_24"
         android:layout_height="@dimen/icon_size_24"
         android:src="@drawable/ic_public"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_repo_name"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_public" />
+        tools:src="@drawable/ic_public"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tv_repo_name"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/spacing_small_8"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small_8"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Retrofit"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_large_20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_publicity"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_publicity"
-        app:layout_constraintTop_toTopOf="@+id/iv_publicity"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Bootstrap" />
 
     <ImageView
@@ -41,36 +42,37 @@
         android:layout_marginTop="@dimen/spacing_small_8"
         android:src="@drawable/ic_branch"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_publicity" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_publicity"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tv_branch_number"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/spacing_tiny_4"
+        android:layout_marginStart="@dimen/spacing_tiny_4"
         android:text="1"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/iv_branch"
         app:layout_constraintLeft_toRightOf="@+id/iv_branch"
         app:layout_constraintTop_toTopOf="@+id/iv_branch"
-        tools:text="777"/>
+        tools:text="777" />
 
     <TextView
         android:id="@+id/tv_branch_caption"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/spacing_tiny_4"
+        android:layout_marginStart="@dimen/spacing_tiny_4"
         android:text="@string/tv_repo_branch_one"
         app:layout_constraintBottom_toBottomOf="@+id/tv_branch_number"
         app:layout_constraintLeft_toRightOf="@+id/tv_branch_number"
         app:layout_constraintTop_toTopOf="@+id/tv_branch_number"
-        tools:text="branches"/>
+        tools:text="branches" />
 
     <ImageView
         android:id="@+id/iv_tag"
         android:layout_width="@dimen/icon_size_20"
         android:layout_height="@dimen/icon_size_20"
-        android:layout_marginLeft="@dimen/spacing_normal_16"
+        android:layout_marginStart="@dimen/spacing_normal_16"
         android:src="@drawable/ic_tag"
         app:layout_constraintBottom_toBottomOf="@+id/tv_branch_caption"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -81,44 +83,74 @@
         android:id="@+id/tv_tag_number"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/spacing_tiny_4"
+        android:layout_marginStart="@dimen/spacing_tiny_4"
         android:text="0"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/iv_tag"
         app:layout_constraintLeft_toRightOf="@+id/iv_branch"
         app:layout_constraintStart_toEndOf="@+id/iv_tag"
         app:layout_constraintTop_toTopOf="@+id/iv_tag"
-        tools:text="999"/>
+        tools:text="999" />
 
     <TextView
         android:id="@+id/tv_tag_caption"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/spacing_tiny_4"
-        android:text="tags"
+        android:layout_marginStart="@dimen/spacing_tiny_4"
+        android:text="@string/tv_repo_tag_zero"
         app:layout_constraintBottom_toBottomOf="@+id/tv_tag_number"
         app:layout_constraintLeft_toRightOf="@+id/tv_branch_number"
         app:layout_constraintStart_toEndOf="@+id/tv_tag_number"
         app:layout_constraintTop_toTopOf="@+id/tv_tag_number" />
 
-    <TextView
-        android:id="@+id/tv_edited_caption"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="Edited "
-        android:layout_marginLeft="@dimen/spacing_normal_16"
-        app:layout_constraintLeft_toRightOf="@+id/tv_tag_caption"
-        app:layout_constraintStart_toEndOf="@+id/tv_tag_caption"
-        app:layout_constraintTop_toTopOf="@+id/tv_tag_caption" />
+    <ImageView
+        android:id="@+id/iv_commit"
+        android:layout_width="@dimen/icon_size_20"
+        android:layout_height="@dimen/icon_size_20"
+        android:layout_marginStart="@dimen/spacing_normal_16"
+        android:src="@drawable/ic_commit"
+        app:layout_constraintLeft_toRightOf="@id/tv_tag_caption"
+        app:layout_constraintTop_toTopOf="@id/tv_tag_caption"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tag_caption" />
 
     <TextView
-        android:id="@+id/tv_edited_ago"
+        android:id="@+id/tv_commit_number"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toRightOf="@+id/tv_edited_caption"
-        app:layout_constraintTop_toTopOf="@id/tv_edited_caption"
-        app:layout_constraintBottom_toBottomOf="@id/tv_edited_caption"
-        tools:text="2 days ago"/>
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_marginStart="@dimen/spacing_tiny_4"
+        app:layout_constraintLeft_toRightOf="@id/iv_commit"
+        app:layout_constraintTop_toTopOf="@id/iv_commit"
+        app:layout_constraintBottom_toBottomOf="@id/iv_commit" />
+
+    <TextView
+        android:id="@+id/tv_commit_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_repo_commit_zero"
+        android:layout_marginStart="@dimen/spacing_tiny_4"
+        app:layout_constraintLeft_toRightOf="@+id/tv_commit_number"
+        app:layout_constraintTop_toTopOf="@id/tv_commit_number"
+        app:layout_constraintBottom_toBottomOf="@id/tv_commit_number" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_edited_caption"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginLeft="@dimen/spacing_normal_16"-->
+<!--        android:text="Edited "-->
+<!--        app:layout_constraintLeft_toRightOf="@+id/tv_tag_caption"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/tv_tag_caption"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/tv_tag_caption" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_edited_ago"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/tv_edited_caption"-->
+<!--        app:layout_constraintLeft_toRightOf="@+id/tv_edited_caption"-->
+<!--        app:layout_constraintTop_toTopOf="@id/tv_edited_caption"-->
+<!--        tools:text="2 days ago" />-->
 
     <!-- TODO: Add constraints from style if needed -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -136,12 +168,13 @@
         <ImageView
             android:id="@+id/iv_watch"
             style="@style/ImageViewIcon"
-            android:src="@drawable/ic_watch" />
+            android:src="@drawable/ic_watch"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_watch_caption"
             style="@style/TextViewCaption"
-            android:text="Watch"
+            android:text="@string/tv_repo_watch"
             app:layout_constraintLeft_toRightOf="@id/iv_watch" />
 
         <View
@@ -171,12 +204,13 @@
         <ImageView
             android:id="@+id/iv_star"
             style="@style/ImageViewIcon"
-            android:src="@drawable/ic_star" />
+            android:src="@drawable/ic_star"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_star_caption"
             style="@style/TextViewCaption"
-            android:text="Star"
+            android:text="@string/tv_repo_star"
             app:layout_constraintLeft_toRightOf="@id/iv_star" />
 
         <View
@@ -207,12 +241,13 @@
         <ImageView
             android:id="@+id/iv_fork"
             style="@style/ImageViewIcon"
-            android:src="@drawable/ic_fork" />
+            android:src="@drawable/ic_fork"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_fork_caption"
             style="@style/TextViewCaption"
-            android:text="Fork"
+            android:text="@string/tv_repo_fork"
             app:layout_constraintLeft_toRightOf="@id/iv_fork" />
 
         <View
