@@ -16,6 +16,10 @@
     <string name="tv_repo_star">Star</string>
     <!-- Fork  -->
     <string name="tv_repo_fork">Fork</string>
+    <!-- Commits -->
+    <string name="tv_repo_commit_zero">commits</string>
+    <string name="tv_repo_commit_one">commit</string>
+    <string name="tv_repo_commit_many">commits</string>
 
 
     <!-- Strings for layout tools  -->
