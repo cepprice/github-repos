@@ -1,10 +1,12 @@
 package ru.cepprice.githubprojects.data.local.model
 
+import ru.cepprice.githubprojects.R
+
 
 data class RepoView private constructor(
     val name: String,
-    val isFork: Boolean,
-    val isPrivate: Boolean,
+    private val isFork: Boolean,
+    private val isPrivate: Boolean,
     val branchesCount: Int,
     val branchCaption: String,
     val tagsCount: Int,
@@ -14,6 +16,7 @@ data class RepoView private constructor(
     val watchersCount: Int,
     val starsCount: Int,
     val forksCount: Int,
+    val src: Int
 ) {
 
     class Builder() {
@@ -21,20 +24,12 @@ data class RepoView private constructor(
         private lateinit var name: String
         private var isFork: Boolean = false
         private var isPrivate: Boolean = false
-
         private var branchesCount: Int = 1
-        private var branchCaption: String = "branch"
-
         private var tagsCount: Int = 0
-        private var tagCaption: String = "tags"
-
         private var commitsCount: Int = 0
-        private var commitCaption: String = "commits"
-
         private var watchersCount: Int = 1
         private var starsCount: Int = 0
         private var forksCount: Int = 0
-
 
         fun name(name: String) = apply { this.name = name }
 
@@ -58,9 +53,14 @@ data class RepoView private constructor(
             val branchCaption = if (branchesCount == 1) "branch" else "branches"
             val tagCaption = if (tagsCount == 1) "tag" else "tags"
             val commitCaption = if (commitsCount == 1) "commit" else "commits"
-
+            val src =
+                if (isFork) R.drawable.ic_fork
+                else {
+                    if (isPrivate) R.drawable.ic_private
+                    else R.drawable.ic_public
+                }
             return RepoView(name, isFork, isPrivate, branchesCount, branchCaption, tagsCount,
-                tagCaption, commitsCount, commitCaption, watchersCount, starsCount, forksCount)
+                tagCaption, commitsCount, commitCaption, watchersCount, starsCount, forksCount, src)
         }
     }
 }
