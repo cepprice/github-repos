@@ -8,4 +8,9 @@ data class RepoView(
     val watch: String,
     val star: String,
     val fork: String
-)
+) {
+
+    class Builder() {
+        private var
+    }
+}
