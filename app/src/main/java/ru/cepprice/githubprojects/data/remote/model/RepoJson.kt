@@ -5,11 +5,11 @@ data class RepoJson(
     val archived: Boolean,
     val assignees_url: String,
     val blobs_url: String,
-    val branches_url: String,
+    val branches_url: String, // Branches url
     val clone_url: String,
     val collaborators_url: String,
     val comments_url: String,
-    val commits_url: String,
+    val commits_url: String, // Commits url
     val compare_url: String,
     val contents_url: String,
     val contributors_url: String,
@@ -20,9 +20,9 @@ data class RepoJson(
     val disabled: Boolean,
     val downloads_url: String,
     val events_url: String,
-    val fork: Boolean,
+    val fork: Boolean, // Is fork
     val forks: Int,
-    val forks_count: Int,
+    val forks_count: Int, // Forks count
     val forks_url: String,
     val full_name: String,
     val git_commits_url: String,
@@ -56,23 +56,23 @@ data class RepoJson(
     val open_issues_count: Int,
     val owner: OwnerJson,
     val permissions: PermissionsJson,
-    val `private`: Boolean,
+    val private: Boolean, // Is private
     val pulls_url: String,
     val pushed_at: String,
     val releases_url: String,
     val size: Int,
     val ssh_url: String,
-    val stargazers_count: Int,
+    val stargazers_count: Int, // Stars url
     val stargazers_url: String,
     val statuses_url: String,
     val subscribers_url: String,
     val subscription_url: String,
     val svn_url: String,
-    val tags_url: String,
+    val tags_url: String, // Tags url
     val teams_url: String,
     val trees_url: String,
     val updated_at: String,
     val url: String,
     val watchers: Int,
-    val watchers_count: Int
+    val watchers_count: Int // Watchers count
 )
