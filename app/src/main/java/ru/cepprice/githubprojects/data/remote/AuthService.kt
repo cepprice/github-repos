@@ -5,7 +5,7 @@ import retrofit2.http.*
 import ru.cepprice.githubprojects.data.remote.model.AccessToken
 
 
-interface AuthGitHubApi {
+interface AuthService {
 
     @Headers("Accept: application/json")
     @FormUrlEncoded
