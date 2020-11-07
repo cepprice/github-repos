@@ -37,7 +37,7 @@ class AuthFragment : Fragment() {
         wv_auth.settings.javaScriptEnabled = true
         wv_auth.webViewClient = getWebViewClient()
         wv_auth.loadUrl(buildAuthUrl())
-            .also { Log.d("M_AuthFragment", "WebView is loading url") }
+            .also { Log.d("M_AuthFragment", "WebView is loading url: ${buildAuthUrl()}") }
 
     }
 
@@ -90,6 +90,7 @@ class AuthFragment : Fragment() {
                 callAccessToken.enqueue(
                     success = {
                         val accessToken = it.body()?.accessToken!!
+                        Log.d("M_AuthFragment", "Access token: $accessToken")
                         findNavController().navigateToReposListFragment(accessToken)
                     },
                     error = {
