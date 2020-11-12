@@ -21,8 +21,6 @@ interface GitHubService {
     ): Response<List<Repo>>
 
 
-    // Get list of one branch (that will be first) to get branches count
-    // from Link header
     @GET
     @Headers("Accept: application/vnd.github.v3+json")
     suspend fun getBranches(

@@ -8,7 +8,6 @@ import kotlinx.coroutines.*
 import ru.cepprice.githubprojects.data.local.model.RepoView
 import ru.cepprice.githubprojects.data.remote.model.branch.Branch
 import ru.cepprice.githubprojects.data.remote.model.contributor.Contributor
-import ru.cepprice.githubprojects.data.remote.model.repo.Repo
 import ru.cepprice.githubprojects.data.remote.model.tag.Tag
 import ru.cepprice.githubprojects.data.repository.Repository
 import ru.cepprice.githubprojects.extensions.toRepoView
@@ -22,9 +21,9 @@ class ReposViewModel @ViewModelInject constructor(
     val repoViewsLd = MutableLiveData<Resource<ArrayList<RepoView>>>()
 
     fun start(accessToken: String) {
-        val accessToken = "token $accessToken"
+        val token = "token $accessToken"
         CoroutineScope(Dispatchers.IO).launch {
-            val reposResource = repository.newGetAllRepos(accessToken) // Get all repos
+            val reposResource = repository.newGetAllRepos(token) // Get all repos
 
             if (passErrorIfExists(reposResource)) return@launch
 
@@ -52,21 +51,21 @@ class ReposViewModel @ViewModelInject constructor(
                         when (url) {
                             branchesUrl -> {
                                 branchesResource = repository.optGetBranchCount(
-                                    accessToken,
+                                    token,
                                     branchesUrl.plus(query)
                                 )
                             }
 
                             tagsUrl -> {
                                 tagsResource = repository.optGetTagCount(
-                                    accessToken,
+                                    token,
                                     tagsUrl.plus(query)
                                 )
                             }
 
                             contributorsUrl -> {
                                 contributorsResource = repository.optGetContributors(
-                                    accessToken, contributorsUrl
+                                    token, contributorsUrl
                                 )
                             }
                         }
@@ -81,37 +80,12 @@ class ReposViewModel @ViewModelInject constructor(
                     return@launch
                 }
 
-                // If resource doesn't have heeded (it means there is 0..1 tags or/and branches)
-                val repeatedUrls = mutableListOf<String>()
-                if (branchesResource.header == null) repeatedUrls.add(branchesUrl)
-                if (tagsResource.header == null) repeatedUrls.add(tagsUrl)
-
-                val repeatedJobs: List<Job> = repeatedUrls.map { url ->
-                    CoroutineScope(Dispatchers.IO).launch {
-                        when (url) {
-                            branchesUrl -> {
-                                branchesResource = repository.optGetBranchCount(
-                                    accessToken, branchesUrl
-                                )
-                            }
-
-                            tagsUrl -> {
-                                tagsResource = repository.optGetTagCount(
-                                    accessToken, tagsUrl
-                                )
-                            }
-                        }
-                    }
-                }
-                repeatedJobs.joinAll()
-
-                if (passErrorIfExists(branchesResource) || passErrorIfExists(tagsResource)) {
-                    return@launch
-                }
-
-                val branchesCount = parseHeader(branchesResource.header?: null) ?: branchesResource.data!!.size
-                val tagsCount = parseHeader(tagsResource.header ?: null) ?: tagsResource.data!!.size
-                val commitsCount = contributorsResource.data?.map { it.contributions }?.sum() ?: 0
+                val branchesCount: Int =
+                    parseHeader(branchesResource.header) ?: branchesResource.data!!.size
+                 val tagsCount: Int =
+                     parseHeader(tagsResource.header) ?: tagsResource.data!!.size
+                val commitsCount: Int =
+                    contributorsResource.data?.map { it.contributions }?.sum() ?: 0
 
                 repoViewsResource.data!!.add(repo.toRepoView(branchesCount, tagsCount, commitsCount))
 
