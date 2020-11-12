@@ -2,13 +2,16 @@ package ru.cepprice.githubprojects.ui.fragment.repos
 
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import kotlinx.coroutines.*
 import ru.cepprice.githubprojects.data.local.model.RepoView
 import ru.cepprice.githubprojects.data.remote.model.branch.Branch
 import ru.cepprice.githubprojects.data.remote.model.contributor.Contributor
 import ru.cepprice.githubprojects.data.remote.model.tag.Tag
+import ru.cepprice.githubprojects.data.remote.model.user.User
 import ru.cepprice.githubprojects.data.repository.Repository
 import ru.cepprice.githubprojects.extensions.toRepoView
 import ru.cepprice.githubprojects.utils.Resource
@@ -18,10 +21,19 @@ class ReposViewModel @ViewModelInject constructor(
     private val repository: Repository,
 ) : ViewModel() {
 
+    private val token = MutableLiveData<String>()
+
     val repoViewsLd = MutableLiveData<Resource<ArrayList<RepoView>>>()
+
+    private val mUser = token.switchMap { token ->
+        repository.getUser(token)
+    }
+
+    val user: LiveData<Resource<User>> = mUser
 
     fun start(accessToken: String) {
         val token = "token $accessToken"
+        this.token.value = token
         CoroutineScope(Dispatchers.IO).launch {
             val reposResource = repository.newGetAllRepos(token) // Get all repos
 
@@ -30,7 +42,6 @@ class ReposViewModel @ViewModelInject constructor(
             val repos = reposResource.data!!
             val repoViewsResource = Resource.Success(ArrayList<RepoView>())
 
-            val apprVisibleReposAmount = 7
             var visibleReposCounter = 0
 
             // Get branches, tags and commits count for each repo

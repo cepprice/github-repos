@@ -8,6 +8,7 @@ import ru.cepprice.githubprojects.data.remote.model.branch.Branch
 import ru.cepprice.githubprojects.data.remote.model.contributor.Contributor
 import ru.cepprice.githubprojects.data.remote.model.repo.Repo
 import ru.cepprice.githubprojects.data.remote.model.tag.Tag
+import ru.cepprice.githubprojects.data.remote.model.user.User
 
 interface GitHubService {
 
@@ -15,7 +16,15 @@ interface GitHubService {
     *   GET
     * */
 
+    @GET("/user")
+    @Headers("Accept: application/vnd.github.v3+json")
+    suspend fun getUser(
+        @Header("Authorization") accessToken: String
+    ): Response<User>
+
+
     @GET("/user/repos?type=owner")
+    @Headers("Accept: application/vnd.github.v3+json")
     suspend fun getAllUserOwnedRepos(
         @Header("Authorization") accessToken: String
     ): Response<List<Repo>>

@@ -2,6 +2,7 @@ package ru.cepprice.githubprojects.data.repository
 
 import ru.cepprice.githubprojects.data.remote.GitHubRemoteDataSource
 import ru.cepprice.githubprojects.utils.performDeleteOperation
+import ru.cepprice.githubprojects.utils.performGetOperation
 import ru.cepprice.githubprojects.utils.performPostOperation
 import javax.inject.Inject
 
@@ -27,6 +28,9 @@ class Repository @Inject constructor(
         contributorsUrl: String
     ) = remoteDataSource.getContributors(accessToken, contributorsUrl)
 
+    fun getUser(accessToken: String) =
+        performGetOperation { remoteDataSource.getUser(accessToken) }
+
     fun createRepo(
         accessToken: String,
         name: String,
@@ -34,9 +38,11 @@ class Repository @Inject constructor(
         isPrivate: Boolean = false,
         isReadmeNeeded: Boolean = false
     ) =
-        performPostOperation {remoteDataSource.createRepo(
-            accessToken, name, description, isPrivate, isReadmeNeeded
-        )}
+        performPostOperation {
+            remoteDataSource.createRepo(
+                accessToken, name, description, isPrivate, isReadmeNeeded
+            )
+        }
 
     fun deleteRepo(
         accessToken: String,

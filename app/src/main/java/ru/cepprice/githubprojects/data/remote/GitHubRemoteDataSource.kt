@@ -6,6 +6,9 @@ class GitHubRemoteDataSource @Inject constructor(
     private val gitHubService: GitHubService
 ) : BaseDataSource() {
 
+    suspend fun getUser(accessToken: String) =
+        getResult { gitHubService.getUser(accessToken) }
+
     suspend fun getAllOwnedRepos(accessToken: String) =
         getResult { gitHubService.getAllUserOwnedRepos(accessToken) }
 
@@ -39,4 +42,5 @@ class GitHubRemoteDataSource @Inject constructor(
         owner: String,
         repoName: String
     ) = getResult { gitHubService.deleteRepo(accessToken, owner, repoName) }
+
 }
