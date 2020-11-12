@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_auth" >
         <action
             android:id="@+id/action_authFragment_to_reposListFragment"
-            app:destination="@id/reposListFragment" />
+            app:destination="@id/reposListFragment" >
+            <argument
+                android:name="requestedDeletion"
+                android:defaultValue="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/reposListFragment"
@@ -22,10 +26,29 @@
         <argument
             android:name="accessToken"
             app:argType="string" />
+        <action
+            android:id="@+id/action_reposListFragment_to_deleteDialog"
+            app:destination="@id/deleteDialog" />
+        <argument
+            android:name="requestedDeletion"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
-    <fragment
-        android:id="@+id/testFragment"
-        android:name="ru.cepprice.githubprojects.ui.fragment.TestFragment"
-        android:label="fragment_test"
-        tools:layout="@layout/fragment_test" />
+    <dialog
+        android:id="@+id/deleteDialog"
+        android:name="ru.cepprice.githubprojects.ui.fragment.delete.DeleteDialog"
+        android:label="DeleteDialog" >
+        <action
+            android:id="@+id/action_deleteDialog_to_reposListFragment"
+            app:destination="@id/reposListFragment" />
+        <argument
+            android:name="accessToken"
+            app:argType="string" />
+        <argument
+            android:name="owner"
+            app:argType="string" />
+        <argument
+            android:name="repo"
+            app:argType="string" />
+    </dialog>
 </navigation>

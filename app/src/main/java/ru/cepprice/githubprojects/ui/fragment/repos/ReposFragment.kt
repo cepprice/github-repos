@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.cepprice.githubprojects.databinding.FragmentReposBinding
+import ru.cepprice.githubprojects.extensions.navigateToDeleteRepoDialog
 import ru.cepprice.githubprojects.utils.Resource
 import ru.cepprice.githubprojects.utils.autoCleared
 
@@ -40,27 +42,42 @@ class ReposFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = ReposAdapter { Log.d("M_ReposFragment", "${it.name} clicked") }
+        adapter = ReposAdapter()
         binding.rvRepos.layoutManager = LinearLayoutManager(requireContext())
         binding.rvRepos.adapter = adapter
     }
 
     private fun setupObservers() {
-        viewModel.repoViewsLd.observe(viewLifecycleOwner, { resource ->
+        viewModel.repoViewsLd.observe(viewLifecycleOwner, { viewsResource ->
 
-            if (resource is Resource.Error) {
+            if (viewsResource is Resource.Error) {
                 showErrorMessage()
                 return@observe
             }
 
-            if (resource.data!!.isNullOrEmpty()) {
+            if (viewsResource.data!!.isNullOrEmpty()) {
                 showNoReposMessage()
                 return@observe
             }
 
             showRv()
-            Log.d("M_ReposFragment", "${resource.data.map { "${it.forksCount},  " }}")
-            adapter.setRepos(resource.data)
+            adapter.setRepos(viewsResource.data)
+        })
+
+        viewModel.user.observe(viewLifecycleOwner, { userLoginResource ->
+            if (userLoginResource is Resource.Error) {
+                Log.d("M_ReposFragment", "get login error: ${userLoginResource.errorMessage}")
+                return@observe
+            }
+
+            adapter.addListener { repo ->
+                findNavController().navigateToDeleteRepoDialog(
+                    args.accessToken,
+                    userLoginResource.data!!.login,
+                    repo
+                )
+                true
+            }
         })
     }
 
