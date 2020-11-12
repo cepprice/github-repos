@@ -27,10 +27,6 @@ class ReposViewModel @ViewModelInject constructor(
 
             if (passErrorIfExists(reposResource)) return@launch
 
-            var branchesResource: Resource<List<Branch>> = Resource.Success(emptyList())
-            var tagsResource: Resource<List<Tag>> = Resource.Success(emptyList())
-            var contributorsResource: Resource<List<Contributor>> = Resource.Success(emptyList())
-
             val repos = reposResource.data!!
             val repoViewsResource = Resource.Success(ArrayList<RepoView>())
 
@@ -39,68 +35,105 @@ class ReposViewModel @ViewModelInject constructor(
 
             // Get branches, tags and commits count for each repo
              for (i in repos.indices) {
-                val repo = repos[i]
-                val branchesUrl = repo.branches_url.removeSuffix("{/branch}")
-                val tagsUrl = repo.tags_url
-                val contributorsUrl = repo.contributors_url
-                val urlsList = listOf(branchesUrl, tagsUrl, contributorsUrl)
-                val query = "?per_page=1"
+                 val repo = repos[i]
+                 val branchesUrl = repo.branches_url.removeSuffix("{/branch}")
+                 val tagsUrl = repo.tags_url
+                 val contributorsUrl = repo.contributors_url
 
-                val jobs: List<Job> = urlsList.map { url ->
-                    CoroutineScope(Dispatchers.IO).launch {
-                        when (url) {
-                            branchesUrl -> {
-                                branchesResource = repository.optGetBranchCount(
-                                    token,
-                                    branchesUrl.plus(query)
-                                )
-                            }
+                 val (branchesResource, tagsResource, contributorsResource) =
+                     getResources(token, branchesUrl, tagsUrl, contributorsUrl)
 
-                            tagsUrl -> {
-                                tagsResource = repository.optGetTagCount(
-                                    token,
-                                    tagsUrl.plus(query)
-                                )
-                            }
+                 // If got some error then emit error and stop function execution
+                 if (passErrorIfExists(branchesResource) ||
+                     passErrorIfExists(tagsResource) ||
+                     passErrorIfExists(contributorsResource)
+                 ) {
+                     return@launch
+                 }
 
-                            contributorsUrl -> {
-                                contributorsResource = repository.optGetContributors(
-                                    token, contributorsUrl
-                                )
-                            }
-                        }
-                    }
-                }
-                jobs.joinAll()
-
-                // If got some error then emit error and stop function execution
-                if (passErrorIfExists(branchesResource) ||
-                    passErrorIfExists(tagsResource) ||
-                    passErrorIfExists(contributorsResource)) {
-                    return@launch
-                }
-
-                val branchesCount: Int =
-                    parseHeader(branchesResource.header) ?: branchesResource.data!!.size
+                 val branchesCount: Int =
+                     parseHeader(branchesResource.header) ?: branchesResource.data!!.size
                  val tagsCount: Int =
                      parseHeader(tagsResource.header) ?: tagsResource.data!!.size
-                val commitsCount: Int =
-                    contributorsResource.data?.map { it.contributions }?.sum() ?: 0
+                 val commitsCount: Int =
+                     if (contributorsResource is Resource.NoContent) 0
+                     else contributorsResource.data?.map { it.contributions }?.sum() ?: 0
 
-                repoViewsResource.data!!.add(repo.toRepoView(branchesCount, tagsCount, commitsCount))
+                 repoViewsResource.data!!.add(
+                     repo.toRepoView(
+                         branchesCount,
+                         tagsCount,
+                         commitsCount
+                     )
+                 )
 
-                if ((++visibleReposCounter).rem(apprVisibleReposAmount) == 0 ||
-                        visibleReposCounter == repos.size) {
-                    withContext(Dispatchers.Main){
-                        repoViewsLd.value = repoViewsResource
-                    }
-                }
+                 passDataToAdapterIfNeeded(
+                     ++visibleReposCounter,
+                     repos.size,
+                     repoViewsResource
+                 )
             }
         }
     }
 
+    private suspend fun passDataToAdapterIfNeeded(
+        pos: Int,
+        size: Int,
+        repoViewsResource: Resource.Success<java.util.ArrayList<RepoView>>
+    ) {
+        val apprVisibleReposAmount = 7
+        val isLastInPaging = pos.rem(apprVisibleReposAmount) == 0
+        val isLastInList = pos == size
+        if (isLastInPaging || isLastInList) {
+            withContext(Dispatchers.Main) {
+                repoViewsLd.value = repoViewsResource
+            }
+        }
+    }
+
+    private suspend fun getResources(
+        token: String,
+        branchesUrl: String,
+        tagsUrl: String,
+        contributorsUrl: String
+    ): Triple<Resource<List<Branch>>, Resource<List<Tag>>, Resource<List<Contributor>>> {
+        val urlsList = listOf(branchesUrl, tagsUrl, contributorsUrl)
+        val query = "?per_page=1"
+
+        var branchesResource: Resource<List<Branch>> = Resource.Success(emptyList())
+        var tagsResource: Resource<List<Tag>> = Resource.Success(emptyList())
+        var contributorsResource: Resource<List<Contributor>> = Resource.Success(emptyList())
+
+        val jobs: List<Job> = urlsList.map { url ->
+            CoroutineScope(Dispatchers.IO).launch {
+                when (url) {
+                    branchesUrl -> {
+                        branchesResource = repository.getBranches(
+                            token,
+                            branchesUrl.plus(query)
+                        )
+                    }
+                    tagsUrl -> {
+                        tagsResource = repository.getTags(
+                            token,
+                            tagsUrl.plus(query)
+                        )
+                    }
+                    contributorsUrl -> {
+                        contributorsResource = repository.getContributors(
+                            token, contributorsUrl
+                        )
+                    }
+                }
+            }
+        }
+        jobs.joinAll()
+
+        return Triple(branchesResource, tagsResource, contributorsResource)
+    }
+
     private suspend fun <T> passErrorIfExists(resource: Resource<T>): Boolean {
-        if (resource is Resource.Success) return false
+        if ( resource !is Resource.Error) return false
 
         withContext(Dispatchers.Main) {
             repoViewsLd.value = Resource.Error(resource.errorMessage)

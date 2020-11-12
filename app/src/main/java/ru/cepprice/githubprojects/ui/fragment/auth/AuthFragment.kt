@@ -21,7 +21,7 @@ import ru.cepprice.githubprojects.R
 import ru.cepprice.githubprojects.data.remote.RetrofitBuilder
 import ru.cepprice.githubprojects.data.remote.model.AccessToken
 import ru.cepprice.githubprojects.data.remote.extensions.enqueue
-import ru.cepprice.githubprojects.ui.extensions.navigateToReposListFragment
+import ru.cepprice.githubprojects.extensions.navigateToReposListFragment
 
 @AndroidEntryPoint
 class AuthFragment : Fragment() {

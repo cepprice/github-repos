@@ -17,8 +17,8 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
 
-        val token = "token cc4eae6685cff636fda59a596abf2170a392d36c"
-        val url = " https://api.github.com/repos/cepprice/json-parse/branches?per_page=1".removeSuffix("{/sha}")
+        val token = "token fa85917fd1857c172616ae4c0c0e40cfcf033711"
+        val url = " https://api.github.com/repos/cepprice/test5/contributors".removeSuffix("{/sha}")
 
         val urls = listOf(url, url)
 
@@ -26,8 +26,9 @@ class TestActivity : AppCompatActivity() {
         val repository = Repository(remoteDataSource)
 
         CoroutineScope(Dispatchers.IO).launch {
-            val branches = RetrofitBuilder.apiGitHub.getBranches(token, url)
-            Log.d("M_TestActivity", "${branches.code()} ${branches.headers()["Link"]}")
+            val contributors = RetrofitBuilder.apiGitHub.getContributors(token, url)
+            Log.d("M_TestActivity", "${contributors.code()}")
+            Log.d("M_TestActivity", "${contributors.body()}")
         }
 
     }

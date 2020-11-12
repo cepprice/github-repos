@@ -12,17 +12,17 @@ class Repository @Inject constructor(
     suspend fun newGetAllRepos(accessToken: String) =
         remoteDataSource.getAllOwnedRepos(accessToken)
 
-    suspend fun optGetBranchCount(
+    suspend fun getBranches(
         accessToken: String,
         branchesUrl: String
     ) = remoteDataSource.getBranches(accessToken, branchesUrl)
 
-    suspend fun optGetTagCount(
+    suspend fun getTags(
         accessToken: String,
         tagsUrl: String
     ) = remoteDataSource.getTags(accessToken, tagsUrl)
 
-    suspend fun optGetContributors(
+    suspend fun getContributors(
         accessToken: String,
         contributorsUrl: String
     ) = remoteDataSource.getContributors(accessToken, contributorsUrl)

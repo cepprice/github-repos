@@ -10,8 +10,15 @@ abstract class BaseDataSource {
             val response = call()
             if (response.isSuccessful) {
                 val body = response.body()
-                val header = response.headers()["Link"]
-                if (body != null) return Resource.Success(body, header)
+
+                // If status is 204 No Content (when repo was only created and has no commits)
+                if (isNoContentStatus(response)) {
+                    return Resource.NoContent()
+                }
+
+                // Get amount of pages with per_page=1
+                val linkHeader = response.headers()["Link"]
+                if (body != null) return Resource.Success(body, linkHeader)
             }
             return error("${response.code()} ${response.message()}")
         } catch (e: Exception) {
@@ -19,12 +26,11 @@ abstract class BaseDataSource {
         }
     }
 
-    private fun <T> error(message: String): Resource.Error<T> {
-        return Resource.Error<T>(message)
-    }
+    private fun <T> error(message: String) =
+        Resource.Error<T>(message)
 
-    companion object {
-        const val ERR_IN_PROCESS = "in_process"
-        const val ERR_NO_COMMITS = "no_commits"
-    }
+    private fun <T> isNoContentStatus(response: Response<T>) =
+        response.body() == null &&
+                response.raw().code() == 204 &&
+                response.raw().message() == "No Content"
 }
