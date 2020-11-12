@@ -3,6 +3,7 @@
 
     <!-- Font sizes -->
     <dimen name="font_small_10">10sp</dimen>
+    <dimen name="font_default_14">14sp</dimen>
     <dimen name="font_normal_16">16sp</dimen>
     <dimen name="font_big_20">20sp</dimen>
     <dimen name="font_large_28">28sp</dimen>
@@ -15,6 +16,7 @@
     <dimen name="spacing_tiny_4">4dp</dimen>
 
     <!-- Element's sizes -->
+    <dimen name="icon_size_12">12dp</dimen>
     <dimen name="icon_size_16">16dp</dimen>
     <dimen name="icon_size_20">20dp</dimen>
     <dimen name="icon_size_24">24dp</dimen>

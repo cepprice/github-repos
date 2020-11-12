@@ -1,30 +1,21 @@
 <resources>
     <string name="app_name">GitHub Projects</string>
 
-
     <!-- Strings for RepoView   -->
-    <!-- Branches   -->
-    <string name="tv_repo_branch_one">branch</string>
-    <string name="tv_repo_branch_many">branches</string>
-    <!-- Tags  -->
-    <string name="tv_repo_tag_zero">tags</string>
-    <string name="tv_repo_tag_one">tag</string>
-    <string name="tv_repo_tag_many">tags</string>
-    <!-- Watch  -->
     <string name="tv_repo_watch">Watch</string>
-    <!-- Star  -->
     <string name="tv_repo_star">Star</string>
-    <!-- Fork  -->
     <string name="tv_repo_fork">Fork</string>
-    <!-- Commits -->
-    <string name="tv_repo_commit_zero">commits</string>
-    <string name="tv_repo_commit_one">commit</string>
-    <string name="tv_repo_commit_many">commits</string>
 
-
+    <!-- Errors -->
     <string name="error_repos">Oops! Something went wrong</string>
 
+    <!-- Messages -->
     <string name="message_no_repos">Seems you have no repositories yet</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_are_you_sure">Are you absolutely sure?</string>
+    <string name="message_warning">Unexpected bad things will happen if you don’t read this!</string>
+    <string name="message_caution">This action <b>cannot</b> be undone. This will permanently delete the <b>$repo$</b> repository, wiki, issues, comments, packages, secrets, workflow runs, and remove all collaborator associations.</string>
+    <string name="message_confirm">Please type <b>$repo$</b> to confirm.</string>
+
+    <string name="btn_delete">I understand, delete this repository</string>
+
 </resources>
