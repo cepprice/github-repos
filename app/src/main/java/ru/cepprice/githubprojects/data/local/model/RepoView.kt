@@ -5,14 +5,9 @@ import ru.cepprice.githubprojects.R
 
 data class RepoView private constructor(
     val name: String,
-    private val isFork: Boolean,
-    private val isPrivate: Boolean,
-    val branchesCount: Int,
-    val branchCaption: String,
-    val tagsCount: Int,
-    val tagCaption: String,
-    val commitsCount: Int,
-    val commitCaption: String,
+    val branchesCount: String,
+    val tagsCount: String,
+    val commitsCount: String,
     val watchersCount: Int,
     val starsCount: Int,
     val forksCount: Int,
@@ -22,26 +17,21 @@ data class RepoView private constructor(
     class Builder() {
 
         private lateinit var name: String
-        private var isFork: Boolean = false
-        private var isPrivate: Boolean = false
-        private var branchesCount: Int = 1
-        private var tagsCount: Int = 0
-        private var commitsCount: Int = 0
+        private var branchesCount: String = "1 branch"
+        private var tagsCount: String = "0 tags"
+        private var commitsCount: String = "0 commits"
         private var watchersCount: Int = 1
         private var starsCount: Int = 0
         private var forksCount: Int = 0
+        private var src: Int = R.drawable.ic_private
 
         fun name(name: String) = apply { this.name = name }
 
-        fun isFork(isFork: Boolean) = apply { this.isFork = isFork }
+        fun branchesCount(branchesCount: String) = apply { this.branchesCount = branchesCount }
 
-        fun isPrivate(isPrivate: Boolean) = apply { this.isPrivate = isPrivate }
+        fun tagsCount(tagsCount: String) = apply { this.tagsCount = tagsCount }
 
-        fun branchesCount(branchesCount: Int) = apply { this.branchesCount = branchesCount }
-
-        fun tagsCount(tagsCount: Int) = apply { this.tagsCount = tagsCount }
-
-        fun commitsCount(commitsCount: Int) = apply { this.commitsCount = commitsCount }
+        fun commitsCount(commitsCount: String) = apply { this.commitsCount = commitsCount }
 
         fun watchersCount(watchersCount: Int) = apply { this.watchersCount = watchersCount }
 
@@ -49,18 +39,11 @@ data class RepoView private constructor(
 
         fun forksCount(forksCount: Int) = apply { this.forksCount = forksCount}
 
+        fun src(src: Int) = apply { this.src = src }
+
         fun build(): RepoView {
-            val branchCaption = if (branchesCount == 1) "branch" else "branches"
-            val tagCaption = if (tagsCount == 1) "tag" else "tags"
-            val commitCaption = if (commitsCount == 1) "commit" else "commits"
-            val src =
-                if (isFork) R.drawable.ic_fork
-                else {
-                    if (isPrivate) R.drawable.ic_private
-                    else R.drawable.ic_public
-                }
-            return RepoView(name, isFork, isPrivate, branchesCount, branchCaption, tagsCount,
-                tagCaption, commitsCount, commitCaption, watchersCount, starsCount, forksCount, src)
+            return RepoView(name, branchesCount, tagsCount,
+                commitsCount, watchersCount, starsCount, forksCount, src)
         }
     }
 }

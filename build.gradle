@@ -4,6 +4,10 @@ buildscript {
     ext.retrofit2_version = "2.9.0"
     ext.coroutines_version = "1.4.0"
     ext.nav_version = "2.3.1"
+    ext.lifecycle_version = "2.2.0"
+    ext.hilt_android = "2.28.1-alpha"
+    ext.hilt_lifecycle = "1.0.0-alpha02"
+    ext.fragment_version = "1.2.5"
 
     repositories {
         google()
@@ -13,7 +17,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:4.0.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
-
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_android"
     }
 }
 

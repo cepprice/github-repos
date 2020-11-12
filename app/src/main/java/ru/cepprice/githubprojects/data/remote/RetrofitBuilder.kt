@@ -22,8 +22,8 @@ object RetrofitBuilder {
             .build()
     }
 
-    val authGitHub: AuthGitHubApi = getAuthGitRetrofit().create(AuthGitHubApi::class.java)
-    val apiGitHub: GitHubApi = getApiGitRetrofit().create(GitHubApi::class.java)
+    val authGitHub: AuthService = getAuthGitRetrofit().create(AuthService::class.java)
+    val apiGitHub: GitHubService = getApiGitRetrofit().create(GitHubService::class.java)
 
     val REDIRECT_URI = "cepprice://callback"
 }

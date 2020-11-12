@@ -12,6 +12,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.coroutines.*
 import retrofit2.Call
@@ -22,6 +23,7 @@ import ru.cepprice.githubprojects.data.remote.model.AccessToken
 import ru.cepprice.githubprojects.data.remote.extensions.enqueue
 import ru.cepprice.githubprojects.ui.extensions.navigateToReposListFragment
 
+@AndroidEntryPoint
 class AuthFragment : Fragment() {
 
     override fun onCreateView(

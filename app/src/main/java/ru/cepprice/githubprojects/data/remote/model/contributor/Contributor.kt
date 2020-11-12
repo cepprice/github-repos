@@ -1,7 +1,8 @@
-package ru.cepprice.githubprojects.data.remote.model
+package ru.cepprice.githubprojects.data.remote.model.contributor
 
-data class OwnerJson(
+data class Contributor(
     val avatar_url: String,
+    val contributions: Int,
     val events_url: String,
     val followers_url: String,
     val following_url: String,

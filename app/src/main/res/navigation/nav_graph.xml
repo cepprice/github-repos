@@ -16,11 +16,16 @@
     </fragment>
     <fragment
         android:id="@+id/reposListFragment"
-        android:name="ru.cepprice.githubprojects.ui.fragment.reposlist.ReposListFragment"
+        android:name="ru.cepprice.githubprojects.ui.fragment.repos.ReposFragment"
         android:label="fragment_repos_list"
-        tools:layout="@layout/fragment_repos_list" >
+        tools:layout="@layout/fragment_repos" >
         <argument
             android:name="accessToken"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="ru.cepprice.githubprojects.ui.fragment.TestFragment"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" />
 </navigation>
