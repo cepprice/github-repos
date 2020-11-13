@@ -13,8 +13,8 @@
     <string name="message_no_repos">Seems you have no repositories yet</string>
     <string name="message_are_you_sure">Are you absolutely sure?</string>
     <string name="message_warning">Unexpected bad things will happen if you don’t read this!</string>
-    <string name="message_caution">This action <b>cannot</b> be undone. This will permanently delete the <b>$repo$</b> repository, wiki, issues, comments, packages, secrets, workflow runs, and remove all collaborator associations.</string>
-    <string name="message_confirm">Please type <b>$repo$</b> to confirm.</string>
+    <string name="message_explanation">This action <![CDATA[<b>cannot</b>]]> be undone. This will permanently delete the <![CDATA[<b>%s</b>]]> repository, wiki, issues, comments, packages, secrets, workflow runs, and remove all collaborator associations.</string>
+    <string name="message_confirm">Please type <![CDATA[<b>%s</b>]]> to confirm.</string>
 
     <string name="btn_delete">I understand, delete this repository</string>
 

@@ -24,7 +24,8 @@
                 android:text="@string/message_are_you_sure"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:padding="@dimen/spacing_normal_16"/>
+                android:padding="@dimen/spacing_normal_16"
+                tools:viewBindingIgnore="true"/>
 
             <FrameLayout
                 android:id="@+id/fl_iv_cancel"
@@ -52,18 +53,19 @@
             android:layout_height="wrap_content"
             android:background="@color/yellow_pale"
             android:padding="@dimen/spacing_normal_16"
-            android:text="@string/message_warning" />
+            android:text="@string/message_warning"
+            tools:viewBindingIgnore="true" />
 
         <include layout="@layout/import_horizontal_yellow_line" />
 
         <TextView
-            android:id="@+id/tv_caution"
+            android:id="@+id/tv_explanation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/spacing_normal_16"
             android:paddingTop="@dimen/spacing_normal_16"
             android:paddingRight="@dimen/spacing_normal_16"
-            tools:text="@string/message_caution" />
+            tools:text="@string/message_explanation" />
 
         <TextView
             android:id="@+id/tv_confirm"
@@ -80,6 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_default_14"
+            android:maxLines="1"
             android:background="@drawable/border_white_round_8"
             android:paddingTop="@dimen/spacing_small_8"
             android:paddingBottom="@dimen/spacing_small_8"
@@ -95,10 +98,12 @@
             android:layout_height="wrap_content"
             android:textAllCaps="false"
             android:textColor="@color/red"
+            android:clickable="false"
+            android:alpha="0.5"
+            android:background="@drawable/border_pale_round_8"
             android:minHeight="0dp"
             android:paddingTop="@dimen/spacing_small_8"
             android:paddingBottom="@dimen/spacing_small_8"
-            android:background="@drawable/border_white_round_8"
             android:layout_marginHorizontal="@dimen/spacing_normal_16"
             android:layout_marginTop="@dimen/spacing_small_8"
             android:layout_marginBottom="@dimen/spacing_normal_16"

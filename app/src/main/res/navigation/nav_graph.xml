@@ -30,7 +30,7 @@
             android:id="@+id/action_reposListFragment_to_deleteDialog"
             app:destination="@id/deleteDialog" />
         <argument
-            android:name="requestedDeletion"
+            android:name="hasDeleted"
             app:argType="boolean"
             android:defaultValue="false" />
     </fragment>
