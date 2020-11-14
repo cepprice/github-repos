@@ -12,7 +12,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.cepprice.githubprojects.databinding.FragmentReposBinding
-import ru.cepprice.githubprojects.extensions.fromReposListFragmentToDeleteRepoDialog
+import ru.cepprice.githubprojects.extensions.fromReposListFragmentToAddDialog
+import ru.cepprice.githubprojects.extensions.fromReposListFragmentToDeleteDialog
 import ru.cepprice.githubprojects.utils.Resource
 import ru.cepprice.githubprojects.utils.autoCleared
 
@@ -30,15 +31,14 @@ class ReposFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("M_ReposFragment", "onCreateView")
         binding = FragmentReposBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("M_ReposFragment", "onViewCreated")
-        viewModel.start(args.accessToken!!)
+
+        viewModel.start(args.accessToken)
         setupRecyclerView()
         setupObservers()
     }
@@ -56,6 +56,8 @@ class ReposFragment : Fragment() {
                 Log.d("M_ReposFragment", "repos: ${viewsResource.errorMessage}")
                 return@observe
             }
+
+            binding.fab.visibility = View.VISIBLE
 
             if (viewsResource.data!!.isNullOrEmpty()) {
                 showNoReposMessage()
@@ -75,12 +77,17 @@ class ReposFragment : Fragment() {
             activity?.title = userLogin
 
             adapter.addListener { repo ->
-                findNavController().fromReposListFragmentToDeleteRepoDialog(
-                    args.accessToken!!,
+                findNavController().fromReposListFragmentToDeleteDialog(
+                    args.accessToken,
                     userLogin,
                     repo
                 )
                 true
+            }
+
+            binding.fab.setOnClickListener {
+                findNavController()
+                    .fromReposListFragmentToAddDialog(args.accessToken, userLogin)
             }
         })
 

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:ignore="RtlHardcoded">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_caption_new_repo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_create_new_repo"
+            android:textSize="@dimen/font_big_20"
+            android:textColor="@color/black"
+            android:layout_marginBottom="@dimen/spacing_normal_16"
+            android:layout_marginTop="@dimen/spacing_normal_16"
+            android:layout_marginLeft="@dimen/spacing_normal_16" />
+
+        <FrameLayout
+            android:id="@+id/fl_iv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_small_8"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/spacing_normal_16"
+            android:layout_marginRight="@dimen/spacing_small_8">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size_12"
+                android:layout_height="@dimen/icon_size_12"
+                android:src="@drawable/ic_cancel" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/import_horizontal_grey_line" />
+
+    <TextView
+        style="@style/BlackBoldTextView"
+        android:text="Repository name"
+        android:layout_marginLeft="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_small_8" />
+
+    <EditText
+        android:id="@+id/et_repo_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_default_14"
+        android:lines="1"
+        android:background="@drawable/border_grey_round_8"
+        android:inputType="textNoSuggestions|textShortMessage"
+        android:imeOptions="actionDone"
+        android:paddingTop="@dimen/spacing_small_8"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ -_"
+        android:paddingBottom="@dimen/spacing_small_8"
+        android:paddingLeft="@dimen/spacing_normal_16"
+        android:paddingRight="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_small_8"
+        android:layout_marginBottom="@dimen/spacing_normal_16"
+        android:layout_marginHorizontal="@dimen/spacing_normal_16"
+        tools:text="github-repos" />
+
+    <include layout="@layout/import_horizontal_grey_line" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_normal_16"
+        android:layout_marginLeft="@dimen/spacing_small_8"
+        android:layout_marginRight="@dimen/spacing_normal_16">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_public"
+                style="@style/BlueRadioButton"
+                android:minWidth="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_public"
+                app:layout_constraintBottom_toBottomOf="@id/iv_public"/>
+
+            <ImageView
+                android:id="@+id/iv_public"
+                android:layout_width="@dimen/icon_size_48"
+                android:layout_height="@dimen/icon_size_48"
+                android:src="@drawable/ic_public"
+                app:tint="#959da5"
+                android:layout_marginTop="@dimen/spacing_normal_16"
+                android:layout_marginLeft="@dimen/spacing_small_8"
+                app:layout_constraintLeft_toRightOf="@id/rb_public"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_public"
+                style="@style/BlackBoldTextView"
+                android:text="@string/tv_public"
+                android:layout_marginLeft="@dimen/spacing_tiny_4"
+                app:layout_constraintTop_toTopOf="@+id/iv_public"
+                app:layout_constraintLeft_toRightOf="@id/iv_public" />
+
+            <TextView
+                android:id="@+id/tv_public_explain"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_public_explain"
+                app:layout_constraintLeft_toLeftOf="@id/tv_public"
+                app:layout_constraintTop_toBottomOf="@id/tv_public"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:text="@string/tv_public_explain"/>
+
+            <RadioButton
+                android:id="@+id/rb_private"
+                style="@style/BlueRadioButton"
+                android:minWidth="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_private"
+                app:layout_constraintBottom_toBottomOf="@id/iv_private"/>
+
+            <ImageView
+                android:id="@+id/iv_private"
+                android:layout_width="@dimen/icon_size_48"
+                android:layout_height="@dimen/icon_size_48"
+                android:layout_marginLeft="@dimen/spacing_small_8"
+                android:src="@drawable/ic_private"
+                android:layout_marginTop="@dimen/spacing_normal_16"
+                app:layout_constraintLeft_toRightOf="@+id/rb_private"
+                app:layout_constraintTop_toBottomOf="@+id/tv_public_explain"
+                app:tint="#b9ad87" />
+
+            <TextView
+                android:id="@+id/tv_private"
+                style="@style/BlackBoldTextView"
+                android:text="@string/tv_private"
+                android:layout_marginLeft="@dimen/spacing_tiny_4"
+                app:layout_constraintTop_toTopOf="@id/iv_private"
+                app:layout_constraintLeft_toRightOf="@id/iv_private" />
+
+            <TextView
+                android:id="@+id/tv_private_explain"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_private_explain"
+                app:layout_constraintLeft_toLeftOf="@id/tv_private"
+                app:layout_constraintTop_toBottomOf="@id/tv_private"
+                app:layout_constraintRight_toRightOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RadioGroup>
+
+    <include layout="@layout/import_horizontal_grey_line" />
+
+    <TextView
+        android:id="@+id/tv_init_caption"
+        style="@style/BlackBoldTextView"
+        android:text="@string/tv_init"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginLeft="@dimen/spacing_normal_16"
+        android:layout_marginRight="@dimen/spacing_normal_16"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_skip"
+        android:layout_marginLeft="@dimen/spacing_normal_16"
+        android:layout_marginRight="@dimen/spacing_normal_16" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginBottom="@dimen/spacing_normal_16">
+
+        <CheckBox
+            android:id="@+id/cb_readme"
+            style="@style/BlueCheckBox"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:layout_marginLeft="@dimen/spacing_small_8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_readme"
+            style="@style/BlackBoldTextView"
+            android:text="@string/tv_readme"
+            android:layout_marginLeft="@dimen/spacing_small_8"
+            app:layout_constraintLeft_toRightOf="@id/cb_readme"
+            app:layout_constraintTop_toTopOf="@id/cb_readme"
+            app:layout_constraintBottom_toBottomOf="@id/cb_readme"/>
+
+        <TextView
+            android:id="@+id/tv_readme_explain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_readme_explain"
+            android:layout_marginRight="@dimen/spacing_normal_16"
+            app:layout_constraintTop_toBottomOf="@id/tv_readme"
+            app:layout_constraintLeft_toLeftOf="@id/tv_readme"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cb_gitignore"
+            style="@style/BlueCheckBox"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:layout_marginLeft="@dimen/spacing_small_8"
+            android:layout_marginTop="@dimen/spacing_normal_16"
+            app:layout_constraintTop_toBottomOf="@id/tv_readme_explain"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_gitignore"
+            style="@style/BlackBoldTextView"
+            android:text="@string/tv_gitignore"
+            android:layout_marginLeft="@dimen/spacing_small_8"
+            app:layout_constraintLeft_toRightOf="@id/cb_gitignore"
+            app:layout_constraintTop_toTopOf="@id/cb_gitignore"
+            app:layout_constraintBottom_toBottomOf="@id/cb_gitignore" />
+
+        <TextView
+            android:id="@+id/tv_gitignore_explain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_gitignore_explain"
+            android:layout_marginRight="@dimen/spacing_normal_16"
+            app:layout_constraintLeft_toLeftOf="@id/tv_gitignore"
+            app:layout_constraintTop_toBottomOf="@id/tv_gitignore"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cb_license"
+            style="@style/BlueCheckBox"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:layout_marginLeft="@dimen/spacing_small_8"
+            android:layout_marginTop="@dimen/spacing_normal_16"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_gitignore_explain"/>
+
+        <TextView
+            android:id="@+id/tv_license"
+            style="@style/BlackBoldTextView"
+            android:text="@string/tv_license"
+            android:layout_marginLeft="@dimen/spacing_small_8"
+            app:layout_constraintLeft_toRightOf="@id/cb_license"
+            app:layout_constraintTop_toTopOf="@id/cb_license"
+            app:layout_constraintBottom_toBottomOf="@id/cb_license" />
+
+        <TextView
+            android:id="@+id/tv_license_explain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_license_explain"
+            android:layout_marginRight="@dimen/spacing_normal_16"
+            app:layout_constraintLeft_toLeftOf="@id/tv_license"
+            app:layout_constraintTop_toBottomOf="@id/tv_license"
+            app:layout_constraintRight_toRightOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include layout="@layout/import_horizontal_grey_line" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_create"
+        style="@style/AccentButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_create_repo"
+        android:alpha="0.5"
+        android:clickable="false"
+        android:background="@drawable/border_btn"
+        android:layout_marginLeft="@dimen/spacing_normal_16"
+        android:layout_marginRight="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginBottom="@dimen/spacing_normal_16" />
+
+</LinearLayout>

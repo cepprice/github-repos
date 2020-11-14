@@ -23,15 +23,13 @@
         tools:layout="@layout/fragment_repos" >
         <argument
             android:name="accessToken"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="repo"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <action
             android:id="@+id/action_reposListFragment_to_deleteDialog"
             app:destination="@id/deleteDialog" />
+        <action
+            android:id="@+id/action_reposListFragment_to_addDialog"
+            app:destination="@id/addDialog" />
     </fragment>
     <dialog
         android:id="@+id/deleteDialog"
@@ -46,8 +44,16 @@
         <argument
             android:name="repo"
             app:argType="string" />
-        <action
-            android:id="@+id/action_deleteDialog_to_reposListFragment"
-            app:destination="@id/reposListFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/addDialog"
+        android:name="ru.cepprice.githubprojects.ui.fragment.add.AddDialog"
+        android:label="AddDialog" >
+        <argument
+            android:name="accessToken"
+            app:argType="string" />
+        <argument
+            android:name="owner"
+            app:argType="string" />
     </dialog>
 </navigation>

@@ -79,6 +79,7 @@
         app:icon="@drawable/ic_public"
         app:iconTint="@color/white"
         android:backgroundTint="@color/colorAccent"
+        android:visibility="gone"
         android:layout_margin="@dimen/spacing_normal_16"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

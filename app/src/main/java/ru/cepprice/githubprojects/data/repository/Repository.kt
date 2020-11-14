@@ -34,13 +34,12 @@ class Repository @Inject constructor(
     fun createRepo(
         accessToken: String,
         name: String,
-        description: String = "",
         isPrivate: Boolean = false,
         isReadmeNeeded: Boolean = false
     ) =
         performPostOperation {
             remoteDataSource.createRepo(
-                accessToken, name, description, isPrivate, isReadmeNeeded
+                accessToken, name, isPrivate, isReadmeNeeded
             )
         }
 

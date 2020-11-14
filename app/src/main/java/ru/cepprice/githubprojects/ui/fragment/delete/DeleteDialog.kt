@@ -17,8 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.cepprice.githubprojects.R
 import ru.cepprice.githubprojects.databinding.DialogDeleteBinding
 import ru.cepprice.githubprojects.extensions.getHtmlSpannedString
-import ru.cepprice.githubprojects.extensions.fromAuthFragmentToReposListFragment
-import ru.cepprice.githubprojects.extensions.fromDeleteDialogToReposListFragment
 import ru.cepprice.githubprojects.utils.Resource
 import ru.cepprice.githubprojects.utils.autoCleared
 

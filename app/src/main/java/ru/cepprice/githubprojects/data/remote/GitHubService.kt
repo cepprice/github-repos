@@ -75,7 +75,6 @@ interface GitHubService {
     suspend fun createRepo(
         @Header("Authorization") accessToken: String,
         @Query("name") name: String,
-        @Query("description") description: String,
         @Query("private") isPrivate: Boolean,
         @Query("auto_init") isReadmeSelected: Boolean,
         //@Query("gitignore_template") gitignoreType: String,

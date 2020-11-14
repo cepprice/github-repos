@@ -30,11 +30,10 @@ class GitHubRemoteDataSource @Inject constructor(
     suspend fun createRepo(
         accessToken: String,
         name: String,
-        description: String = "",
         isPrivate: Boolean = false,
         isReadmeNeeded: Boolean = false,
     ) = getResult { gitHubService.createRepo(
-            accessToken, name, description, isPrivate, isReadmeNeeded
+            accessToken, name, isPrivate, isReadmeNeeded
         ) }
 
     suspend fun deleteRepo(

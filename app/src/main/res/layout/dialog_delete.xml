@@ -96,19 +96,18 @@
 
         <Button
             android:id="@+id/btn_delete"
+            style="@style/PaleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/btn_delete"
             android:textAllCaps="false"
             android:textColor="@color/red"
             android:clickable="false"
             android:alpha="0.5"
             android:background="@drawable/border_pale_round_8"
             android:minHeight="0dp"
-            android:paddingTop="@dimen/spacing_small_8"
-            android:paddingBottom="@dimen/spacing_small_8"
             android:layout_marginHorizontal="@dimen/spacing_normal_16"
             android:layout_marginTop="@dimen/spacing_small_8"
-            android:layout_marginBottom="@dimen/spacing_normal_16"
-            android:text="@string/btn_delete" />
+            android:layout_marginBottom="@dimen/spacing_normal_16" />
     </LinearLayout>
 </layout>
