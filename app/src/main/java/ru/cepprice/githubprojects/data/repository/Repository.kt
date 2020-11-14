@@ -10,7 +10,7 @@ class Repository @Inject constructor(
     private val remoteDataSource: GitHubRemoteDataSource
 ) {
 
-    suspend fun newGetAllRepos(accessToken: String) =
+    suspend fun getAllRepos(accessToken: String) =
         remoteDataSource.getAllOwnedRepos(accessToken)
 
     suspend fun getBranches(

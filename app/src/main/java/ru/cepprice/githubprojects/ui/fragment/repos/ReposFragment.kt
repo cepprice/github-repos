@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.cepprice.githubprojects.databinding.FragmentReposBinding
-import ru.cepprice.githubprojects.extensions.navigateToDeleteRepoDialog
+import ru.cepprice.githubprojects.extensions.fromReposListFragmentToDeleteRepoDialog
 import ru.cepprice.githubprojects.utils.Resource
 import ru.cepprice.githubprojects.utils.autoCleared
 
@@ -30,13 +30,15 @@ class ReposFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("M_ReposFragment", "onCreateView")
         binding = FragmentReposBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.start(args.accessToken)
+        Log.d("M_ReposFragment", "onViewCreated")
+        viewModel.start(args.accessToken!!)
         setupRecyclerView()
         setupObservers()
     }
@@ -49,9 +51,9 @@ class ReposFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.repoViewsLd.observe(viewLifecycleOwner, { viewsResource ->
-
             if (viewsResource is Resource.Error) {
                 showErrorMessage()
+                Log.d("M_ReposFragment", "repos: ${viewsResource.errorMessage}")
                 return@observe
             }
 
@@ -71,14 +73,23 @@ class ReposFragment : Fragment() {
             }
 
             adapter.addListener { repo ->
-                findNavController().navigateToDeleteRepoDialog(
-                    args.accessToken,
+                findNavController().fromReposListFragmentToDeleteRepoDialog(
+                    args.accessToken!!,
                     userLoginResource.data!!.login,
                     repo
                 )
                 true
             }
         })
+
+        findNavController()
+            .currentBackStackEntry?.savedStateHandle?.getLiveData<String>("DELETED_REPO")
+            ?.observe(viewLifecycleOwner, {
+                Log.d("M_ReposFragment", "change: $it")
+                if (it != null) {
+                    adapter.deleteRepo(it).also { Log.d("M_ReposFragment", "got $it") }
+                }
+            })
     }
 
     private fun showRv() {

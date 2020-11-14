@@ -32,11 +32,9 @@ class ReposViewModel @ViewModelInject constructor(
     val user: LiveData<Resource<User>> = mUser
 
     fun start(accessToken: String) {
-        val token = "token $accessToken"
-        this.token.value = token
+        this.token.value = accessToken
         CoroutineScope(Dispatchers.IO).launch {
-            val reposResource = repository.newGetAllRepos(token) // Get all repos
-
+            val reposResource = repository.getAllRepos(accessToken) // Get all repos
             if (passErrorIfExists(reposResource)) return@launch
 
             val repos = reposResource.data!!
@@ -52,7 +50,7 @@ class ReposViewModel @ViewModelInject constructor(
                  val contributorsUrl = repo.contributors_url
 
                  val (branchesResource, tagsResource, contributorsResource) =
-                     getResources(token, branchesUrl, tagsUrl, contributorsUrl)
+                     getResources(accessToken, branchesUrl, tagsUrl, contributorsUrl)
 
                  // If got some error then emit error and stop function execution
                  if (passErrorIfExists(branchesResource) ||

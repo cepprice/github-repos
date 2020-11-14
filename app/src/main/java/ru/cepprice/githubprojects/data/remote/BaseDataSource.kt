@@ -20,14 +20,14 @@ abstract class BaseDataSource {
                 val linkHeader = response.headers()["Link"]
                 if (body != null) return Resource.Success(body, linkHeader)
             }
-            return error("${response.code()} ${response.message()}")
+            return error("${response.raw().code()} ${response.raw().message()}")
         } catch (e: Exception) {
             return error(e.message ?: e.toString())
         }
     }
 
     private fun <T> error(message: String) =
-        Resource.Error<T>(message)
+        Resource.Error<T>(errorMessage = message)
 
     private fun <T> isNoContentStatus(response: Response<T>) =
         response.body() == null &&

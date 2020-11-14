@@ -21,7 +21,7 @@ import ru.cepprice.githubprojects.R
 import ru.cepprice.githubprojects.data.remote.RetrofitBuilder
 import ru.cepprice.githubprojects.data.remote.model.AccessToken
 import ru.cepprice.githubprojects.data.remote.extensions.enqueue
-import ru.cepprice.githubprojects.extensions.navigateToReposListFragment
+import ru.cepprice.githubprojects.extensions.fromAuthFragmentToReposListFragment
 
 @AndroidEntryPoint
 class AuthFragment : Fragment() {
@@ -93,7 +93,7 @@ class AuthFragment : Fragment() {
                     success = {
                         val accessToken = it.body()?.accessToken!!
                         Log.d("M_AuthFragment", "Access token: $accessToken")
-                        findNavController().navigateToReposListFragment(accessToken)
+                        findNavController().fromAuthFragmentToReposListFragment("token $accessToken")
                     },
                     error = {
                         Log.d("M_AuthFragment", "Got error enqueuing")

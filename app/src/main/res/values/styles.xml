@@ -53,10 +53,4 @@
         <item name="layout_constraintRight_toRightOf">parent</item>
     </style>
 
-
-    <style name="BottomSheetStyle" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
 </resources>

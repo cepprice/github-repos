@@ -1,13 +1,13 @@
 package ru.cepprice.githubprojects.ui.fragment.delete
 
-import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,6 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.cepprice.githubprojects.R
 import ru.cepprice.githubprojects.databinding.DialogDeleteBinding
 import ru.cepprice.githubprojects.extensions.getHtmlSpannedString
+import ru.cepprice.githubprojects.extensions.fromAuthFragmentToReposListFragment
+import ru.cepprice.githubprojects.extensions.fromDeleteDialogToReposListFragment
+import ru.cepprice.githubprojects.utils.Resource
 import ru.cepprice.githubprojects.utils.autoCleared
 
 @AndroidEntryPoint
@@ -29,22 +32,18 @@ class DeleteDialog
 
     private var binding: DialogDeleteBinding by autoCleared()
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DialogDeleteBinding.inflate(layoutInflater, container, false)
-        // Keyboard won't cover the button under EditText
-        setStyle(STYLE_NORMAL, R.style.BottomSheetStyle)
-        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
 
         fullRepoName = "${args.owner}/${args.repo}"
 
@@ -64,6 +63,20 @@ class DeleteDialog
     }
 
     private fun setupObservers() {
+        viewModel.deletionResult.observe(viewLifecycleOwner, { resource ->
+            if (resource is Resource.Error) {
+                Log.d("M_DeleteDialog", "Resource has error: ${resource.errorMessage}")
+                Toast.makeText(requireContext(), "Error. Try again later", Toast.LENGTH_SHORT).show()
+                findNavController().navigateUp()
+                return@observe
+            }
+            if (resource is Resource.NoContent) {
+                Log.d("M_DeleteDialog", "Successful deletion")
+                findNavController()
+                    .previousBackStackEntry?.savedStateHandle?.set("DELETED_REPO", args.repo)
+                findNavController().navigateUp()
+            }
+        })
     }
 
     override fun onClick(p0: View?) {
@@ -71,7 +84,7 @@ class DeleteDialog
             binding.btnDelete.id -> {
                 viewModel.start(Triple(args.accessToken, args.owner, args.repo))
                 binding.etFullRepoName.removeTextChangedListener(getTextWatcher())
-                binding.btnDelete.isClickable = false
+                makeBtnInactive()
             }
             binding.flIvCancel.id ->
                 findNavController().navigateUp()
@@ -81,7 +94,6 @@ class DeleteDialog
     private fun getTextWatcher(): TextWatcher {
         return object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                "Stub"
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -91,7 +103,6 @@ class DeleteDialog
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                "Stub"
             }
         }
     }

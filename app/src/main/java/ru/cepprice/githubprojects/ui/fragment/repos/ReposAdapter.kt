@@ -19,6 +19,11 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.RepoViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun deleteRepo(name: String) {
+        repos.removeAll(repos.filter { it.name == name })
+        notifyDataSetChanged()
+    }
+
     fun addListener(listener: (String) -> Boolean) {
         this.listener = listener
     }
