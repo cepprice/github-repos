@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -54,6 +55,7 @@ class DeleteDialog
             R.string.message_confirm, fullRepoName
         )
 
+        binding.etFullRepoName.imeOptions = EditorInfo.IME_ACTION_DONE
         binding.etFullRepoName.addTextChangedListener(getTextWatcher())
 
         binding.flIvCancel.setOnClickListener(this)
