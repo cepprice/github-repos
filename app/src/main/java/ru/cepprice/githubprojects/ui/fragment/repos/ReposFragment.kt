@@ -68,14 +68,16 @@ class ReposFragment : Fragment() {
 
         viewModel.user.observe(viewLifecycleOwner, { userLoginResource ->
             if (userLoginResource is Resource.Error) {
-                Log.d("M_ReposFragment", "get login error: ${userLoginResource.errorMessage}")
                 return@observe
             }
+
+            val userLogin = userLoginResource.data!!.login
+            activity?.title = userLogin
 
             adapter.addListener { repo ->
                 findNavController().fromReposListFragmentToDeleteRepoDialog(
                     args.accessToken!!,
-                    userLoginResource.data!!.login,
+                    userLogin,
                     repo
                 )
                 true
