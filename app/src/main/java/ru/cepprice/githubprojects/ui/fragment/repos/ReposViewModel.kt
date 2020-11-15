@@ -15,7 +15,7 @@ import ru.cepprice.githubprojects.data.remote.model.user.User
 import ru.cepprice.githubprojects.data.repository.Repository
 import ru.cepprice.githubprojects.extensions.toRepoView
 import ru.cepprice.githubprojects.utils.Resource
-import ru.cepprice.githubprojects.utils.parseHeader
+import ru.cepprice.githubprojects.utils.Utils.parseHeader
 
 class ReposViewModel @ViewModelInject constructor(
     private val repository: Repository,
