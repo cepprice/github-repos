@@ -3,7 +3,7 @@
     <color name="colorPrimary">#032f62</color>
     <color name="colorPrimaryDark">#05264c</color>
     <color name="colorAccent">#2ea44f</color>
-
+    
     <color name="pale">#CDEFEFEF</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
@@ -13,4 +13,5 @@
     <color name="yellow_dark">#EFE4B1</color>
     <color name="red">#CB2431</color>
     <color name="blue">#0075ff</color>
+    <color name="alice_blue">#EAF5FF</color>
 </resources>

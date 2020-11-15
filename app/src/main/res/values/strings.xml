@@ -34,6 +34,8 @@
     <string name="tv_license">Choose a license</string>
     <string name="tv_license_explain">A license tells others what they can and can\'t do with your code.</string>
     <string name="btn_create_repo">Create repository</string>
-
+    <string name="tv_this_will_set">This will set </string>
+    <string name="tv_main">main</string>
+    <string name="tv_as_def_branch"> as the default branch.</string>
 
 </resources>

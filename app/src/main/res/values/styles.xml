@@ -74,15 +74,14 @@
     <style name="BlueRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="buttonTint">@color/blue</item>
+        <item name="buttonTint">@color/trigger_filter_tint</item>
     </style>
 
-    <style name="BlueCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+    <style name="BlueCheckBox">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="buttonTint">@color/blue</item>
+        <item name="buttonTint">@color/trigger_filter_tint</item>
     </style>
-
 
     <style name="AccentButton" parent="Widget.MaterialComponents.Button">
         <item name="materialThemeOverlay">@style/AccentButtonThemeOverlay</item>

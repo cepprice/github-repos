@@ -19,6 +19,7 @@
             android:text="@string/tv_create_new_repo"
             android:textSize="@dimen/font_big_20"
             android:textColor="@color/black"
+            android:background="@drawable/border_btn"
             android:layout_marginBottom="@dimen/spacing_normal_16"
             android:layout_marginTop="@dimen/spacing_normal_16"
             android:layout_marginLeft="@dimen/spacing_normal_16" />
@@ -263,6 +264,48 @@
             app:layout_constraintLeft_toLeftOf="@id/tv_license"
             app:layout_constraintTop_toBottomOf="@id/tv_license"
             app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_main_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_this_will_set"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/spacing_normal_16"
+            android:layout_marginTop="@dimen/spacing_normal_16"
+            android:layout_marginRight="@dimen/spacing_normal_16"
+            app:layout_constraintTop_toBottomOf="@id/tv_license_explain"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_iv_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/tv_main"
+            android:textSize="@dimen/font_small_10"
+            android:drawableLeft="@drawable/ic_branch"
+            android:drawablePadding="@dimen/spacing_tiny_4"
+            android:drawableTint="#737a80"
+            android:background="@drawable/border_alice_blue_round_8"
+            android:paddingBottom="2dp"
+            android:paddingRight="@dimen/spacing_tiny_4"
+            android:paddingTop="2dp"
+            android:paddingLeft="@dimen/spacing_tiny_4"
+            android:layout_marginLeft="@dimen/spacing_tiny_4"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_main_message"
+            app:layout_constraintLeft_toRightOf="@+id/tv_main_message" />
+
+        <TextView
+            android:id="@+id/tv_as_def_branch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/tv_as_def_branch"
+            android:layout_marginLeft="@dimen/spacing_tiny_4"
+            app:layout_constraintLeft_toRightOf="@id/tv_iv_main"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_main_message" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/import_horizontal_grey_line" />
