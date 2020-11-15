@@ -26,7 +26,7 @@ class ReposViewModel @ViewModelInject constructor(
     val repoViewsLd = MutableLiveData<Resource<ArrayList<RepoView>>>()
 
     private val mUser = token.switchMap { token ->
-        repository.getUser(token)
+        repository.getLiveUser(token)
     }
 
     val user: LiveData<Resource<User>> = mUser
