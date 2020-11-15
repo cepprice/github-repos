@@ -27,6 +27,12 @@ class GitHubRemoteDataSource @Inject constructor(
         contributorsUrl: String
     ) = getResult { gitHubService.getContributors(accessToken, contributorsUrl) }
 
+    suspend fun getGitignoreTemplates() =
+        getResult { gitHubService.getGitignoreTemplates() }
+
+    suspend fun getLicenses() =
+        getResult { gitHubService.getLicenses() }
+
     suspend fun createRepo(
         accessToken: String,
         name: String,

@@ -28,8 +28,17 @@ class Repository @Inject constructor(
         contributorsUrl: String
     ) = remoteDataSource.getContributors(accessToken, contributorsUrl)
 
-    fun getUser(accessToken: String) =
+    fun getLiveAllRepos(accessToken: String) =
+        performGetOperation { remoteDataSource.getAllOwnedRepos(accessToken) }
+
+    fun getLiveUser(accessToken: String) =
         performGetOperation { remoteDataSource.getUser(accessToken) }
+
+    fun getLiveGitignoreTemplates() =
+        performGetOperation { remoteDataSource.getGitignoreTemplates() }
+
+    fun getLiveLicenses() =
+        performGetOperation { remoteDataSource.getLicenses() }
 
     fun createRepo(
         accessToken: String,

@@ -6,6 +6,7 @@ import retrofit2.http.*
 import ru.cepprice.githubprojects.data.remote.model.AccessToken
 import ru.cepprice.githubprojects.data.remote.model.branch.Branch
 import ru.cepprice.githubprojects.data.remote.model.contributor.Contributor
+import ru.cepprice.githubprojects.data.remote.model.license.License
 import ru.cepprice.githubprojects.data.remote.model.repo.Repo
 import ru.cepprice.githubprojects.data.remote.model.tag.Tag
 import ru.cepprice.githubprojects.data.remote.model.user.User
@@ -52,6 +53,16 @@ interface GitHubService {
         @Header("Authorization") accessToken: String,
         @Url contributorsUrl: String
     ) : Response<List<Contributor>>
+
+
+    @GET("/gitignore/templates")
+    @Headers("Accept: application/vnd.github.v3+json")
+    suspend fun getGitignoreTemplates(): Response<List<String>>
+
+
+    @GET("/licenses")
+    @Headers("Accept: application/vnd.github.v3+json")
+    suspend fun getLicenses(): Response<List<License>>
 
 
     //TODO
