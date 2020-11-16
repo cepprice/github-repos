@@ -1,5 +1,7 @@
 package ru.cepprice.githubprojects.ui.fragment.add
 
+import android.content.res.ColorStateList
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -195,9 +198,7 @@ class AddDialog : BottomSheetDialogFragment(),
 
     private fun setVisibilityOfBranchMessage(isChecked: Boolean) {
         with(binding) {
-            val allUnchecked = !(cbGitignore.isChecked ||
-                    cbReadme.isChecked ||
-                    cbLicense.isChecked)
+            val allUnchecked = !cbReadme.isChecked
 
             if (isChecked) {
                 tvMainMessage.visibility = View.VISIBLE
