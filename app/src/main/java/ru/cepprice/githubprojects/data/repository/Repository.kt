@@ -1,5 +1,6 @@
 package ru.cepprice.githubprojects.data.repository
 
+import ru.cepprice.githubprojects.data.local.model.SendRepo
 import ru.cepprice.githubprojects.data.remote.GitHubRemoteDataSource
 import ru.cepprice.githubprojects.utils.performDeleteOperation
 import ru.cepprice.githubprojects.utils.performGetOperation
@@ -40,15 +41,20 @@ class Repository @Inject constructor(
     fun getLiveLicenses() =
         performGetOperation { remoteDataSource.getLicenses() }
 
-    fun createRepo(
+    fun getLiveAccessToken(
+        clientId: String,
+        clientSecret: String,
+        code: String
+    ) =
+        performGetOperation { remoteDataSource.getAccessToken(clientId, clientSecret, code) }
+
+    fun createLiveRepo(
         accessToken: String,
-        name: String,
-        isPrivate: Boolean = false,
-        isReadmeNeeded: Boolean = false
+        repo: SendRepo
     ) =
         performPostOperation {
             remoteDataSource.createRepo(
-                accessToken, name, isPrivate, isReadmeNeeded
+                accessToken, repo
             )
         }
 

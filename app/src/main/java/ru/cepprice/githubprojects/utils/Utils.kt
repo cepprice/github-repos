@@ -1,5 +1,7 @@
 package ru.cepprice.githubprojects.utils
 
+import ru.cepprice.githubprojects.BuildConfig
+
 
 object Utils {
     fun parseHeader(header: String?): Int? {
@@ -25,5 +27,11 @@ object Utils {
         val regex = Regex(pattern)
 
         return regex.matches(name)
+    }
+
+    fun getCodeFromRedirectUri(uri: String?): String? {
+        if (uri == null || !uri.startsWith(BuildConfig.REDIRECT_URL) ||
+            !uri.contains("code=")) return null
+        return uri.substringAfter("code=")
     }
 }

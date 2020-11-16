@@ -6,6 +6,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.cepprice.githubprojects.data.remote.AuthService
@@ -18,10 +20,18 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object AppModule {
 
+    @Provides
+    fun provideOkHttpClient() = OkHttpClient.Builder().
+            addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }).build()
+
+
     @Singleton
     @Provides
-    fun provideRetrofitApi(gson: Gson): Retrofit = Retrofit.Builder()
+    fun provideRetrofitApi(client: OkHttpClient, gson: Gson): Retrofit = Retrofit.Builder()
         .baseUrl("https://api.github.com")
+        .client(client)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
     

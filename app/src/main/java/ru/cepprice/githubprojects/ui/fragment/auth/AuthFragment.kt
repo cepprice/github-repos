@@ -10,44 +10,70 @@ import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_auth.*
-import kotlinx.coroutines.*
-import retrofit2.Call
 import ru.cepprice.githubprojects.BuildConfig
-import ru.cepprice.githubprojects.R
-import ru.cepprice.githubprojects.data.remote.RetrofitBuilder
-import ru.cepprice.githubprojects.data.remote.model.AccessToken
-import ru.cepprice.githubprojects.data.remote.extensions.enqueue
+import ru.cepprice.githubprojects.databinding.FragmentAuthBinding
 import ru.cepprice.githubprojects.extensions.fromAuthFragmentToReposListFragment
+import ru.cepprice.githubprojects.utils.Resource
+import ru.cepprice.githubprojects.utils.Utils
+import ru.cepprice.githubprojects.utils.autoCleared
 
 @AndroidEntryPoint
 class AuthFragment : Fragment() {
+
+    private val args: AuthFragmentArgs by navArgs()
+    private var binding: FragmentAuthBinding by autoCleared()
+
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_auth, container, false)
+        binding = FragmentAuthBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        wv_auth.settings.javaScriptEnabled = true
-        wv_auth.webViewClient = getWebViewClient()
-        wv_auth.loadUrl(buildAuthUrl())
+        if (args.clearCache) {
+            TODO("need to clear cache and login to GitHub again")
+        }
+
+        binding.wvAuth.settings.javaScriptEnabled = true
+        binding.wvAuth.webViewClient = getWebViewClient()
+        binding.wvAuth.loadUrl(buildAuthUrl())
             .also { Log.d("M_AuthFragment", "WebView is loading url: ${buildAuthUrl()}") }
 
+        setupObserver()
+    }
+
+    private fun setupObserver() {
+        viewModel.accessToken.observe(viewLifecycleOwner, { resource ->
+            if (resource is Resource.Error) {
+                Log.d("M_AuthFragment", "Error: cannot get access token")
+                Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+                return@observe
+            }
+
+            val accessToken = "token ${resource.data!!.accessToken}"
+            findNavController()
+                .fromAuthFragmentToReposListFragment(accessToken)
+                .also { Log.d("M_AuthFragment", "Pass access token: $accessToken") }
+        })
     }
 
     private fun buildAuthUrl(): String {
         return "https://github.com/login/oauth/authorize/" +
                 "?client_id=${BuildConfig.CLIENT_ID}" +
                 "&scope=repo%20delete_repo" +
-                "&redirect_url=${RetrofitBuilder.REDIRECT_URI}"
+                "&redirect_url=${BuildConfig.REDIRECT_URL}"
     }
 
     private fun getWebViewClient(): WebViewClient {
@@ -67,7 +93,8 @@ class AuthFragment : Fragment() {
                 request: WebResourceRequest?,
                 error: WebResourceError?
             ) {
-                view?.visibility = View.GONE
+                binding.wvAuth.visibility = View.GONE
+                binding.ivLogo.visibility = View.VISIBLE
             }
 
             // Don't have to wait until page will be loaded,
@@ -75,42 +102,18 @@ class AuthFragment : Fragment() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
                 Log.d("M_AuthFragment", "page loaded with url: $url")
-                processRedirectUrl(url)
+
+                val code = Utils.getCodeFromRedirectUri(url)
+                if (code == null) {
+                    Log.d("M_AuthFragment", "Got invalid code")
+                    Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+                    return
+                }
+
+                viewModel.start(TokenQueryParams(
+                    BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET, code
+                ))
             }
         }
     }
-
-    private fun processRedirectUrl(url: String?) {
-        val isUrlValid = url != null &&
-                url.startsWith(RetrofitBuilder.REDIRECT_URI) &&
-                url.contains("code=")
-
-        if (isUrlValid) {
-            CoroutineScope(Dispatchers.IO).launch {
-                val callAccessToken = getCallAccessToken(url)
-
-                callAccessToken.enqueue(
-                    success = {
-                        val accessToken = it.body()?.accessToken!!
-                        Log.d("M_AuthFragment", "Access token: $accessToken")
-                        findNavController().fromAuthFragmentToReposListFragment("token $accessToken")
-                    },
-                    error = {
-                        Log.d("M_AuthFragment", "Got error enqueuing")
-                    }
-                )
-            }
-        }
-    }
-
-    private fun getCallAccessToken(url: String?): Call<AccessToken> {
-        val code = url?.substringAfter("code=")!!
-        return RetrofitBuilder.authGitHub.getAccessToken(
-            BuildConfig.CLIENT_ID,
-            BuildConfig.CLIENT_SECRET,
-            code
-        )
-
-    }
-
 }

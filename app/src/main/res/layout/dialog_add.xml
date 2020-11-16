@@ -58,7 +58,6 @@
         android:inputType="textNoSuggestions|textShortMessage"
         android:imeOptions="actionDone"
         android:paddingTop="@dimen/spacing_small_8"
-        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ -_"
         android:paddingBottom="@dimen/spacing_small_8"
         android:paddingLeft="@dimen/spacing_normal_16"
         android:paddingRight="@dimen/spacing_normal_16"
@@ -70,16 +69,16 @@
     <include layout="@layout/import_horizontal_grey_line" />
 
     <RadioGroup
+        android:id="@+id/rg_publicity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_normal_16"
-        android:layout_marginLeft="@dimen/spacing_small_8"
-        android:layout_marginRight="@dimen/spacing_normal_16">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="@dimen/spacing_normal_16"
+            android:layout_marginLeft="@dimen/spacing_small_8"
+            android:layout_marginRight="@dimen/spacing_normal_16">
 
             <RadioButton
                 android:id="@+id/rb_public"
@@ -210,6 +209,7 @@
         <CheckBox
             android:id="@+id/cb_gitignore"
             style="@style/BlueCheckBox"
+            android:visibility="gone"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:layout_marginLeft="@dimen/spacing_small_8"
@@ -220,6 +220,7 @@
         <TextView
             android:id="@+id/tv_gitignore"
             style="@style/BlackBoldTextView"
+            android:visibility="gone"
             android:text="@string/tv_gitignore"
             android:layout_marginLeft="@dimen/spacing_small_8"
             app:layout_constraintLeft_toRightOf="@id/cb_gitignore"
@@ -230,25 +231,60 @@
             android:id="@+id/tv_gitignore_explain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="@string/tv_gitignore_explain"
             android:layout_marginRight="@dimen/spacing_normal_16"
             app:layout_constraintLeft_toLeftOf="@id/tv_gitignore"
             app:layout_constraintTop_toBottomOf="@id/tv_gitignore"
             app:layout_constraintRight_toRightOf="parent" />
 
+        <LinearLayout
+            android:id="@+id/ll_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@drawable/border_grey_round_8"
+            app:layout_constraintTop_toBottomOf="@+id/tv_gitignore_explain"
+            app:layout_constraintLeft_toLeftOf="@id/tv_gitignore_explain">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=".gitignore template:"
+                android:layout_marginLeft="@dimen/spacing_small_8"/>
+
+            <ru.cepprice.githubprojects.ui.custom.DynamicWidthSpinner
+                android:id="@+id/spinner_gitignore"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:padding="0dp"
+                android:background="@null"
+                android:spinnerMode="dialog"
+                android:dropDownWidth="wrap_content"
+
+                android:scrollbars="vertical"
+                android:verticalScrollbarPosition="right"
+                android:entries="@array/spinner_test"
+                android:layout_marginLeft="@dimen/spacing_tiny_4"
+                android:layout_marginRight="@dimen/spacing_tiny_4"/>
+        </LinearLayout>
+
+
         <CheckBox
             android:id="@+id/cb_license"
             style="@style/BlueCheckBox"
+            android:visibility="gone"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:layout_marginLeft="@dimen/spacing_small_8"
             android:layout_marginTop="@dimen/spacing_normal_16"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_gitignore_explain"/>
+            app:layout_constraintTop_toBottomOf="@id/ll_spinner"/>
 
         <TextView
             android:id="@+id/tv_license"
             style="@style/BlackBoldTextView"
+            android:visibility="gone"
             android:text="@string/tv_license"
             android:layout_marginLeft="@dimen/spacing_small_8"
             app:layout_constraintLeft_toRightOf="@id/cb_license"
@@ -259,6 +295,7 @@
             android:id="@+id/tv_license_explain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="@string/tv_license_explain"
             android:layout_marginRight="@dimen/spacing_normal_16"
             app:layout_constraintLeft_toLeftOf="@id/tv_license"

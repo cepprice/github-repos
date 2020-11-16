@@ -20,3 +20,7 @@ fun NavController.fromReposListFragmentToAddDialog(accessToken: String, owner: S
     this.navigate(ReposFragmentDirections
         .actionReposListFragmentToAddDialog(accessToken, owner))
 }
+
+fun NavController.fromReposListFragmentToAuthFragment() {
+    this.navigate(ReposFragmentDirections.actionReposListFragmentToAuthFragment(true))
+}

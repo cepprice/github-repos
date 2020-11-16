@@ -3,6 +3,7 @@ package ru.cepprice.githubprojects.data.remote
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
+import ru.cepprice.githubprojects.data.local.model.SendRepo
 import ru.cepprice.githubprojects.data.remote.model.AccessToken
 import ru.cepprice.githubprojects.data.remote.model.branch.Branch
 import ru.cepprice.githubprojects.data.remote.model.contributor.Contributor
@@ -65,15 +66,14 @@ interface GitHubService {
     suspend fun getLicenses(): Response<List<License>>
 
 
-    //TODO
     @Headers("Accept: application/json")
     @FormUrlEncoded
-    @POST("/login/oauth/access_token")
-    fun getAccessToken(
+    @POST("https://github.com/login/oauth/access_token")
+    suspend fun getAccessToken(
         @Field("client_id") clientId: String,
         @Field("client_secret") clientSecret: String,
         @Field("code") code: String,
-    ): Call<AccessToken>
+    ): Response<AccessToken>
 
 
     /*
@@ -85,11 +85,7 @@ interface GitHubService {
     @Headers("Accept: application/vnd.github.v3+json")
     suspend fun createRepo(
         @Header("Authorization") accessToken: String,
-        @Query("name") name: String,
-        @Query("private") isPrivate: Boolean,
-        @Query("auto_init") isReadmeSelected: Boolean,
-        //@Query("gitignore_template") gitignoreType: String,
-        //@Query("license_template") licenseType: String
+        @Body repo: SendRepo
         ): Response<Repo>
 
 

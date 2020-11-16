@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GitHub Projects</string>
+    <string name="app_name">GitHub</string>
 
     <!-- Strings for RepoView   -->
     <string name="tv_repo_watch">Watch</string>
@@ -37,5 +37,20 @@
     <string name="tv_this_will_set">This will set </string>
     <string name="tv_main">main</string>
     <string name="tv_as_def_branch"> as the default branch.</string>
+    <string name="allowed_input_characters">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ -_ 0123456789</string>
+
+    <string-array name="spinner_test">
+        <item>Android</item>
+        <item>Elm</item>
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>C++</item>
+        <item>Html</item>
+        <item>CSS</item>
+        <item>Unity</item>
+        <item>Ada</item>
+        <item>Clojure</item>
+        <item>Python3</item>
+    </string-array>
 
 </resources>

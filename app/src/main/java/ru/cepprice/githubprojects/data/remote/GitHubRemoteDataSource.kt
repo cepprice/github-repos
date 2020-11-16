@@ -1,5 +1,6 @@
 package ru.cepprice.githubprojects.data.remote
 
+import ru.cepprice.githubprojects.data.local.model.SendRepo
 import javax.inject.Inject
 
 class GitHubRemoteDataSource @Inject constructor(
@@ -33,13 +34,18 @@ class GitHubRemoteDataSource @Inject constructor(
     suspend fun getLicenses() =
         getResult { gitHubService.getLicenses() }
 
+    suspend fun getAccessToken(
+        clientId: String,
+        clientSecret: String,
+        code: String
+    ) =
+        getResult { gitHubService.getAccessToken(clientId, clientSecret, code) }
+
     suspend fun createRepo(
         accessToken: String,
-        name: String,
-        isPrivate: Boolean = false,
-        isReadmeNeeded: Boolean = false,
+        repo: SendRepo
     ) = getResult { gitHubService.createRepo(
-            accessToken, name, isPrivate, isReadmeNeeded
+            accessToken, repo
         ) }
 
     suspend fun deleteRepo(

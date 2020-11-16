@@ -5,23 +5,36 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/MaterialAppTheme.Toolbar"
+        android:titleTextAppearance="@style/MaterialAppTheme.Toolbar.Title"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_repos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible" />
-
-    <ProgressBar
-        android:id="@+id/pb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
+        android:layout_height="0dp"
         android:visibility="visible"
-        app:layout_constraintVertical_bias="0.4"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="@dimen/icon_size_100"
+        android:layout_height="@dimen/icon_size_100"
+        android:src="@drawable/ic_github_logo"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/iv_error"
@@ -73,16 +86,18 @@
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:text="@string/fab"
+        android:textSize="@dimen/font_big_20"
         android:textColor="@color/white"
         app:icon="@drawable/ic_public"
         app:iconTint="@color/white"
+        android:textAlignment="center"
+        app:iconSize="@dimen/icon_size_24"
         android:backgroundTint="@color/colorAccent"
         android:visibility="gone"
         android:layout_margin="@dimen/spacing_normal_16"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,10 @@
             app:destination="@id/reposListFragment"
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true"/>
+        <argument
+            android:name="clearCache"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/reposListFragment"
@@ -30,6 +34,9 @@
         <action
             android:id="@+id/action_reposListFragment_to_addDialog"
             app:destination="@id/addDialog" />
+        <action
+            android:id="@+id/action_reposListFragment_to_authFragment"
+            app:destination="@id/authFragment" />
     </fragment>
     <dialog
         android:id="@+id/deleteDialog"

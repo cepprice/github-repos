@@ -66,12 +66,14 @@ class DeleteDialog
         viewModel.deletionResult.observe(viewLifecycleOwner, { resource ->
             if (resource is Resource.Error) {
                 Log.d("M_DeleteDialog", "Resource has error: ${resource.errorMessage}")
-                Toast.makeText(requireContext(), "Error. Try again later", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error. Try again later", Toast.LENGTH_SHORT)
+                    .show()
                 findNavController().navigateUp()
                 return@observe
             }
             if (resource is Resource.NoContent) {
                 Log.d("M_DeleteDialog", "Successful deletion")
+                Toast.makeText(requireContext(), "Repository deleted", Toast.LENGTH_SHORT).show()
                 findNavController()
                     .previousBackStackEntry?.savedStateHandle?.set("DELETED_REPO", args.repo)
                 findNavController().navigateUp()

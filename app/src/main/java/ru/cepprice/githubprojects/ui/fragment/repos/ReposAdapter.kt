@@ -24,6 +24,11 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.RepoViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun addRepo(repo: RepoView) {
+        repos.add(repo)
+        notifyDataSetChanged()
+    }
+
     fun addListener(listener: (String) -> Boolean) {
         this.listener = listener
     }

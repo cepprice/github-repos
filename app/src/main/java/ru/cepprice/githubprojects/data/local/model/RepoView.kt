@@ -1,6 +1,7 @@
 package ru.cepprice.githubprojects.data.local.model
 
 import ru.cepprice.githubprojects.R
+import java.io.Serializable
 
 
 data class RepoView private constructor(
@@ -12,7 +13,11 @@ data class RepoView private constructor(
     val starsCount: Int,
     val forksCount: Int,
     val src: Int
-) {
+) : Serializable {
+
+    companion object{
+        @JvmStatic private val serialVersionUID = 1L
+    }
 
     class Builder() {
 
