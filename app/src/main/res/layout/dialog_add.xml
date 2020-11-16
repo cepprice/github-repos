@@ -50,10 +50,13 @@
 
     <EditText
         android:id="@+id/et_repo_name"
+        android:theme="@style/EditTextTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_default_14"
         android:lines="1"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@null"
         android:background="@drawable/border_grey_round_8"
         android:inputType="textNoSuggestions|textShortMessage"
         android:imeOptions="actionDone"

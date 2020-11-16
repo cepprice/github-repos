@@ -22,6 +22,10 @@
     <style name="MaterialAppTheme.Toolbar.Title" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="EditTextTheme">
+        <item name="colorControlActivated">@color/blue</item>
+    </style>
     
     <!--To fix rendering in preview -->
     <style name="AppTextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
