@@ -169,18 +169,24 @@ class AddDialog : BottomSheetDialogFragment(),
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             val repoName = p0.toString()
+            if (repoName.isBlank()) return
+
             val isNameFree = !viewModel.repos.value!!.data!!.map { it.name }.contains(repoName)
 
-            if (Utils.isRepoNameValid(repoName) && isNameFree) {
-                if (!binding.cbLicense.isChecked &&
-                            !binding.cbGitignore.isChecked) {
-                    setButtonClickable(true)
-                    return
-                }
-                // TODO check license and/or gitignore template selected
+            if (!isNameFree) {
+                binding.etRepoName.error = "The repository $repoName already exists on this account.\n"
+                setButtonClickable(false)
+                return
             }
 
-            setButtonClickable(false)
+            if (!Utils.isRepoNameValid(repoName)) {
+                binding.etRepoName.error = "Only english letters, digits, underscore and dash allowed"
+                setButtonClickable(false)
+                return
+            }
+
+            setButtonClickable(true)
+
         }
 
         override fun afterTextChanged(p0: Editable?) {
