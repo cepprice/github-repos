@@ -68,7 +68,13 @@ class AddDialog : BottomSheetDialogFragment(),
 
             // Radio Buttons
             rbPublic.setOnClickListener(this@AddDialog)
+            ivPublic.setOnClickListener(this@AddDialog)
+            tvPublic.setOnClickListener(this@AddDialog)
+            tvPublicExplain.setOnClickListener(this@AddDialog)
             rbPrivate.setOnClickListener(this@AddDialog)
+            ivPrivate.setOnClickListener(this@AddDialog)
+            tvPrivate.setOnClickListener(this@AddDialog)
+            tvPrivateExplain.setOnClickListener(this@AddDialog)
 
             // Add button
             btnCreate.setOnClickListener(this@AddDialog)
@@ -130,25 +136,31 @@ class AddDialog : BottomSheetDialogFragment(),
         setVisibilityOfBranchMessage(isChecked)
     }
 
-    override fun onClick(view: View?) {
-        if (binding.flIvCancel == view) {
-            findNavController().navigateUp()
+    override fun onClick(view: View?): Unit = with(binding) { when(view) {
+        flIvCancel -> findNavController().navigateUp()
+
+        rbPublic, ivPublic, tvPublic, tvPublicExplain -> {
+            rbPrivate.isChecked = false
+            rbPublic.isChecked = true
+        }
+        rbPrivate, ivPrivate, tvPrivate, tvPrivateExplain -> {
+            rbPublic.isChecked = false
+            rbPrivate.isChecked = true
         }
 
-        if (binding.rbPublic == view) binding.rbPrivate.isChecked = false
-        else if (binding.rbPrivate == view) binding.rbPublic.isChecked = false
-
         // TODO add license and gitignore template
-        if (binding.btnCreate == view) {
+        btnCreate -> {
             setButtonClickable(false)
             repoToSend = SendRepo(
-                binding.etRepoName.text.toString(),
-                binding.rbPrivate.isChecked,
-                binding.cbReadme.isChecked
+                etRepoName.text.toString(),
+                rbPrivate.isChecked,
+                cbReadme.isChecked
             )
             viewModel.createRepo(repoToSend!!)
         }
-    }
+
+        else -> Log.d("M_AddDialog", "Click on ${view?.id} is not handled")
+    }}
 
     // For EditText with repo name
     private fun getTextWatcher() = object : TextWatcher {
