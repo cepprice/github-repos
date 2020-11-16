@@ -10,7 +10,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.cepprice.githubprojects.data.remote.AuthService
 import ru.cepprice.githubprojects.data.remote.GitHubRemoteDataSource
 import ru.cepprice.githubprojects.data.remote.GitHubService
 import ru.cepprice.githubprojects.data.repository.Repository
@@ -37,10 +36,6 @@ object AppModule {
     
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()
-
-    @Provides
-    fun provideAuthService(retrofit: Retrofit): AuthService =
-            retrofit.create(AuthService::class.java)
 
     @Provides
     fun provideGitHubService(retrofit: Retrofit): GitHubService =
