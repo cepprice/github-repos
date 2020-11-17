@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceError
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -43,7 +40,8 @@ class AuthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (args.clearCache) {
-            // TODO("need to clear cache and login to GitHub again")
+            CookieManager.getInstance().removeAllCookies(null)
+            CookieManager.getInstance().flush()
         }
 
         binding.wvAuth.settings.javaScriptEnabled = true
@@ -101,7 +99,7 @@ class AuthFragment : Fragment() {
             // because this page has no useful info
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                Log.d("M_AuthFragment", "page loaded with url: $url")
+                Log.d("M_AuthFragment", "Page loaded with url: $url")
 
                 if (Utils.isAuthLogin(url)) {
                     binding.ivLogo.visibility = View.GONE
