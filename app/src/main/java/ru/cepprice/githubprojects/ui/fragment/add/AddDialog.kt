@@ -63,6 +63,8 @@ class AddDialog : BottomSheetDialogFragment(),
 
             // Checkboxes
             cbReadme.setOnCheckedChangeListener(this@AddDialog)
+            tvReadme.setOnClickListener(this@AddDialog)
+            tvReadmeExplain.setOnClickListener(this@AddDialog)
 //            cbGitignore.setOnCheckedChangeListener(this@AddDialog)
 //            cbLicense.setOnCheckedChangeListener(this@AddDialog)
 
@@ -97,16 +99,6 @@ class AddDialog : BottomSheetDialogFragment(),
 
             binding.etRepoName.addTextChangedListener(getTextWatcher())
         })
-
-//        viewModel.gitignoreTemplates.observe(viewLifecycleOwner, { resource ->
-//            if (resource is Resource.Error) {
-//                Toast.makeText(
-//                    requireContext(), "Error. Try again later", Toast.LENGTH_SHORT
-//                ).show()
-//                findNavController().navigateUp()
-//                return@observe
-//            }
-//        })
 
         viewModel.addRepoResult.observe(viewLifecycleOwner, { resource ->
             if (resource is Resource.Error) {
@@ -146,9 +138,20 @@ class AddDialog : BottomSheetDialogFragment(),
             rbPrivate.isChecked = false
             rbPublic.isChecked = true
         }
+
         rbPrivate, ivPrivate, tvPrivate, tvPrivateExplain -> {
             rbPublic.isChecked = false
             rbPrivate.isChecked = true
+        }
+
+        tvReadme, tvReadmeExplain -> {
+            if (cbReadme.isChecked) {
+                setVisibilityOfBranchMessage(false)
+                cbReadme.isChecked = false
+            } else {
+                setVisibilityOfBranchMessage(true)
+                cbReadme.isChecked = true
+            }
         }
 
         // TODO add license and gitignore template
