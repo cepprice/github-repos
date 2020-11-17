@@ -31,7 +31,7 @@ import java.io.Serializable
 @AndroidEntryPoint
 class AddDialog : BottomSheetDialogFragment(),
     CompoundButton.OnCheckedChangeListener,
-    View.OnClickListener, View.OnFocusChangeListener, TextView.OnEditorActionListener
+    View.OnClickListener, TextView.OnEditorActionListener
 {
     private val args: AddDialogArgs by navArgs()
     private val viewModel: AddViewModel by viewModels()
@@ -96,7 +96,6 @@ class AddDialog : BottomSheetDialogFragment(),
             }
 
             binding.etRepoName.addTextChangedListener(getTextWatcher())
-            binding.etRepoName.setOnFocusChangeListener(this)
             binding.etRepoName.setOnEditorActionListener(this)
         })
 
@@ -132,7 +131,10 @@ class AddDialog : BottomSheetDialogFragment(),
     }
 
     override fun onClick(view: View?): Unit = with(binding) {
-        if (view != etRepoName) setInputOkVisibility(false)
+        if (view != etRepoName) {
+            setInputOkVisibility(false)
+            hideKeyboard()
+        }
         when(view) {
             flIvCancel -> findNavController().navigateUp()
 
@@ -180,6 +182,7 @@ class AddDialog : BottomSheetDialogFragment(),
             if (repoName.isBlank()) {
                 setInputOkVisibility(false)
                 setInputErrorVisibility(false)
+                setButtonClickable(false)
                 return
             }
 
@@ -214,13 +217,6 @@ class AddDialog : BottomSheetDialogFragment(),
         }
 
         override fun afterTextChanged(p0: Editable?) {
-        }
-    }
-
-    override fun onFocusChange(p0: View?, hasFocus: Boolean) {
-        // TODO is it needed?
-        if (p0 == binding.etRepoName && !hasFocus) {
-            setInputOkVisibility(false)
         }
     }
 
