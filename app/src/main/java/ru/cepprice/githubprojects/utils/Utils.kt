@@ -34,4 +34,13 @@ object Utils {
             !uri.contains("code=")) return null
         return uri.substringAfter("code=")
     }
+
+    fun isAuthLogin(url: String?): Boolean {
+        if (url == null) return false
+        val pattern = "https:\\/\\/github.com\\/login\\?client_id=[0-9a-z]+&" +
+                "return_to=[0-9a-zA-z%]+redirect_url[0-9a-zA-z%]+cepprice"
+        val regex = Regex(pattern)
+
+        return regex.containsMatchIn(url)
+    }
 }

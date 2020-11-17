@@ -43,7 +43,7 @@ class AuthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (args.clearCache) {
-            TODO("need to clear cache and login to GitHub again")
+            // TODO("need to clear cache and login to GitHub again")
         }
 
         binding.wvAuth.settings.javaScriptEnabled = true
@@ -102,6 +102,12 @@ class AuthFragment : Fragment() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
                 Log.d("M_AuthFragment", "page loaded with url: $url")
+
+                if (Utils.isAuthLogin(url)) {
+                    binding.ivLogo.visibility = View.GONE
+                    binding.wvAuth.visibility = View.VISIBLE
+                    return
+                }
 
                 val code = Utils.getCodeFromRedirectUri(url)
                 if (code == null) {

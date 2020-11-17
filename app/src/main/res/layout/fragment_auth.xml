@@ -9,6 +9,7 @@
 
     <WebView
         android:id="@+id/wv_auth"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -17,7 +18,7 @@
         android:layout_width="@dimen/icon_size_100"
         android:layout_height="@dimen/icon_size_100"
         android:src="@drawable/ic_github_logo"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
