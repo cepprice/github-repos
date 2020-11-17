@@ -20,6 +20,9 @@
     <string name="message_explanation">This action <![CDATA[<b>cannot</b>]]> be undone. This will permanently delete the <![CDATA[<b>%s</b>]]> repository, wiki, issues, comments, packages, secrets, workflow runs, and remove all collaborator associations.</string>
     <string name="message_confirm">Please type <![CDATA[<b>%s</b>]]> to confirm.</string>
 
+    <string name="tv_input_ok"><![CDATA[<b>%s</b>]]> is available</string>
+    <string name="tv_error_duplicate_name">The repository <![CDATA[<b>%s</b>]]> already exists on this account.</string>
+    <string name="tv_error_forbidden_symbol">Only english letters, digits, underscore and dash allowed.</string>
     <string name="tv_public">Public</string>
     <string name="tv_public_explain">Anyone can see this repository. You choose who can commit.</string>
     <string name="tv_private">Private</string>
@@ -29,15 +32,10 @@
     <string name="tv_create_new_repo">Create a new repository</string>
     <string name="tv_readme">Add a README file</string>
     <string name="tv_readme_explain">This is where you can write a long description for your project.</string>
-    <string name="tv_gitignore">Add .gitignore</string>
-    <string name="tv_gitignore_explain">Choose which files not to track from a list of templates.</string>
-    <string name="tv_license">Choose a license</string>
-    <string name="tv_license_explain">A license tells others what they can and can\'t do with your code.</string>
     <string name="btn_create_repo">Create repository</string>
     <string name="tv_this_will_set">This will set </string>
     <string name="tv_main">main</string>
     <string name="tv_as_def_branch"> as the default branch.</string>
-    <string name="allowed_input_characters">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ -_ 0123456789</string>
 
     <string-array name="spinner_test">
         <item>Android</item>

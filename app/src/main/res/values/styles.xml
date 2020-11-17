@@ -111,4 +111,18 @@
     <style name="PaleButtonThemeOverlay">
         <item name="colorPrimary">@color/pale</item>
     </style>
+
+    <style name="HorizontalLine">
+        <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
+        <item name="android:layout_marginRight">@dimen/spacing_normal_16</item>
+        <item name="android:layout_marginTop">@dimen/spacing_normal_16</item>
+    </style>
+
+    <style name="TextViewInputMessage">
+        <item name="android:visibility">gone</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_marginTop">9dp</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
+    </style>
 </resources>

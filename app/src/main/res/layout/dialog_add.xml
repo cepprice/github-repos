@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    tools:ignore="RtlHardcoded">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_caption_new_repo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_create_new_repo"
-            android:textSize="@dimen/font_big_20"
-            android:textColor="@color/black"
-            android:background="@drawable/border_btn"
-            android:layout_marginBottom="@dimen/spacing_normal_16"
-            android:layout_marginTop="@dimen/spacing_normal_16"
-            android:layout_marginLeft="@dimen/spacing_normal_16" />
-
-        <FrameLayout
-            android:id="@+id/fl_iv_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_small_8"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/spacing_normal_16"
-            android:layout_marginRight="@dimen/spacing_small_8">
-
-            <ImageView
-                android:layout_width="@dimen/icon_size_12"
-                android:layout_height="@dimen/icon_size_12"
-                android:src="@drawable/ic_cancel" />
-        </FrameLayout>
-    </RelativeLayout>
-
-    <include layout="@layout/import_horizontal_grey_line" />
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
+        android:id="@+id/tv_caption_new_repo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_create_new_repo"
+        android:textSize="@dimen/font_big_20"
+        android:textColor="@color/black"
+        android:background="@drawable/border_btn"
+        android:layout_marginBottom="@dimen/spacing_normal_16"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginLeft="@dimen/spacing_normal_16"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/fl_iv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_small_8"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:layout_marginRight="@dimen/spacing_small_8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/icon_size_12"
+            android:layout_height="@dimen/icon_size_12"
+            android:src="@drawable/ic_cancel" />
+    </FrameLayout>
+
+    <View
+        android:id="@+id/v_line_first"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_light"
+        style="@style/HorizontalLine"
+        app:layout_constraintTop_toBottomOf="@id/tv_caption_new_repo"/>
+
+    <TextView
+        android:id="@+id/tv_repo_name_caption"
         style="@style/BlackBoldTextView"
         android:text="Repository name"
         android:layout_marginLeft="@dimen/spacing_normal_16"
-        android:layout_marginTop="@dimen/spacing_small_8" />
+        android:layout_marginTop="@dimen/spacing_small_8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_line_first"/>
 
     <EditText
         android:id="@+id/et_repo_name"
@@ -67,98 +74,150 @@
         android:layout_marginTop="@dimen/spacing_small_8"
         android:layout_marginBottom="@dimen/spacing_normal_16"
         android:layout_marginHorizontal="@dimen/spacing_normal_16"
+        app:layout_constraintTop_toBottomOf="@id/tv_repo_name_caption"
         tools:text="github-repos" />
 
-    <include layout="@layout/import_horizontal_grey_line" />
-
-    <RadioGroup
-        android:id="@+id/rg_publicity"
+    <View
+        android:id="@+id/v_line_second"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="1dp"
+        android:background="@color/grey_light"
+        style="@style/HorizontalLine"
+        app:layout_constraintTop_toBottomOf="@id/et_repo_name"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_normal_16"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_radio_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_normal_16"
+        android:layout_marginLeft="@dimen/spacing_small_8"
+        android:layout_marginRight="@dimen/spacing_normal_16"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_line_second">
+
+        <RadioButton
+            android:id="@+id/rb_public"
+            style="@style/BlueRadioButton"
+            android:minWidth="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_public"
+            app:layout_constraintBottom_toBottomOf="@id/iv_public"/>
+
+        <ImageView
+            android:id="@+id/iv_public"
+            android:layout_width="@dimen/icon_size_48"
+            android:layout_height="@dimen/icon_size_48"
+            android:src="@drawable/ic_public"
+            app:tint="#959da5"
+            android:layout_marginTop="@dimen/spacing_normal_16"
             android:layout_marginLeft="@dimen/spacing_small_8"
-            android:layout_marginRight="@dimen/spacing_normal_16">
+            app:layout_constraintLeft_toRightOf="@id/rb_public"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-            <RadioButton
-                android:id="@+id/rb_public"
-                style="@style/BlueRadioButton"
-                android:minWidth="0dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@id/iv_public"
-                app:layout_constraintBottom_toBottomOf="@id/iv_public"/>
+        <TextView
+            android:id="@+id/tv_public"
+            style="@style/BlackBoldTextView"
+            android:text="@string/tv_public"
+            android:layout_marginLeft="@dimen/spacing_tiny_4"
+            app:layout_constraintTop_toTopOf="@+id/iv_public"
+            app:layout_constraintLeft_toRightOf="@id/iv_public" />
 
-            <ImageView
-                android:id="@+id/iv_public"
-                android:layout_width="@dimen/icon_size_48"
-                android:layout_height="@dimen/icon_size_48"
-                android:src="@drawable/ic_public"
-                app:tint="#959da5"
-                android:layout_marginTop="@dimen/spacing_normal_16"
-                android:layout_marginLeft="@dimen/spacing_small_8"
-                app:layout_constraintLeft_toRightOf="@id/rb_public"
-                app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/tv_public_explain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_public_explain"
+            app:layout_constraintLeft_toLeftOf="@id/tv_public"
+            app:layout_constraintTop_toBottomOf="@id/tv_public"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="@string/tv_public_explain"/>
 
-            <TextView
-                android:id="@+id/tv_public"
-                style="@style/BlackBoldTextView"
-                android:text="@string/tv_public"
-                android:layout_marginLeft="@dimen/spacing_tiny_4"
-                app:layout_constraintTop_toTopOf="@+id/iv_public"
-                app:layout_constraintLeft_toRightOf="@id/iv_public" />
+        <RadioButton
+            android:id="@+id/rb_private"
+            style="@style/BlueRadioButton"
+            android:minWidth="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_private"
+            app:layout_constraintBottom_toBottomOf="@id/iv_private"/>
 
-            <TextView
-                android:id="@+id/tv_public_explain"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_public_explain"
-                app:layout_constraintLeft_toLeftOf="@id/tv_public"
-                app:layout_constraintTop_toBottomOf="@id/tv_public"
-                app:layout_constraintRight_toRightOf="parent"
-                tools:text="@string/tv_public_explain"/>
+        <ImageView
+            android:id="@+id/iv_private"
+            android:layout_width="@dimen/icon_size_48"
+            android:layout_height="@dimen/icon_size_48"
+            android:layout_marginLeft="@dimen/spacing_small_8"
+            android:src="@drawable/ic_private"
+            android:layout_marginTop="@dimen/spacing_normal_16"
+            app:layout_constraintLeft_toRightOf="@+id/rb_private"
+            app:layout_constraintTop_toBottomOf="@+id/tv_public_explain"
+            app:tint="#b9ad87" />
 
-            <RadioButton
-                android:id="@+id/rb_private"
-                style="@style/BlueRadioButton"
-                android:minWidth="0dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@id/iv_private"
-                app:layout_constraintBottom_toBottomOf="@id/iv_private"/>
+        <TextView
+            android:id="@+id/tv_private"
+            style="@style/BlackBoldTextView"
+            android:text="@string/tv_private"
+            android:layout_marginLeft="@dimen/spacing_tiny_4"
+            app:layout_constraintTop_toTopOf="@id/iv_private"
+            app:layout_constraintLeft_toRightOf="@id/iv_private" />
 
-            <ImageView
-                android:id="@+id/iv_private"
-                android:layout_width="@dimen/icon_size_48"
-                android:layout_height="@dimen/icon_size_48"
-                android:layout_marginLeft="@dimen/spacing_small_8"
-                android:src="@drawable/ic_private"
-                android:layout_marginTop="@dimen/spacing_normal_16"
-                app:layout_constraintLeft_toRightOf="@+id/rb_private"
-                app:layout_constraintTop_toBottomOf="@+id/tv_public_explain"
-                app:tint="#b9ad87" />
+        <TextView
+            android:id="@+id/tv_private_explain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_private_explain"
+            app:layout_constraintLeft_toLeftOf="@id/tv_private"
+            app:layout_constraintTop_toBottomOf="@id/tv_private"
+            app:layout_constraintRight_toRightOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/tv_private"
-                style="@style/BlackBoldTextView"
-                android:text="@string/tv_private"
-                android:layout_marginLeft="@dimen/spacing_tiny_4"
-                app:layout_constraintTop_toTopOf="@id/iv_private"
-                app:layout_constraintLeft_toRightOf="@id/iv_private" />
+    <TextView
+        android:id="@+id/tv_input_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextViewInputMessage"
+        android:textColor="@color/input_text_error"
+        android:background="@drawable/border_error"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_repo_name"
+        tools:text="This name already taken"/>
 
-            <TextView
-                android:id="@+id/tv_private_explain"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_private_explain"
-                app:layout_constraintLeft_toLeftOf="@id/tv_private"
-                app:layout_constraintTop_toBottomOf="@id/tv_private"
-                app:layout_constraintRight_toRightOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </RadioGroup>
+    <ImageView
+        android:id="@+id/iv_input_arrow_error"
+        android:layout_width="@dimen/icon_size_16"
+        android:layout_height="@dimen/icon_size_12"
+        android:visibility="gone"
+        android:src="@drawable/ic_arrow_error"
+        android:layout_marginLeft="@dimen/spacing_special_28"
+        app:layout_constraintTop_toBottomOf="@id/et_repo_name"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
-    <include layout="@layout/import_horizontal_grey_line" />
+    <TextView
+        android:id="@+id/tv_input_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextViewInputMessage"
+        android:textColor="@color/input_text_ok"
+        android:background="@drawable/border_ok"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_repo_name"
+        tools:text="This name already taken"/>
+
+    <ImageView
+        android:id="@+id/iv_input_arrow_ok"
+        android:layout_width="@dimen/icon_size_16"
+        android:layout_height="@dimen/icon_size_12"
+        android:visibility="gone"
+        android:src="@drawable/ic_arrow_ok"
+        android:layout_marginLeft="@dimen/spacing_special_28"
+        app:layout_constraintTop_toBottomOf="@id/et_repo_name"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <View
+        android:id="@+id/v_line_third"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_light"
+        style="@style/HorizontalLine"
+        app:layout_constraintTop_toBottomOf="@id/cl_radio_buttons"/>
 
     <TextView
         android:id="@+id/tv_init_caption"
@@ -166,20 +225,28 @@
         android:text="@string/tv_init"
         android:layout_marginTop="@dimen/spacing_normal_16"
         android:layout_marginLeft="@dimen/spacing_normal_16"
-        android:layout_marginRight="@dimen/spacing_normal_16"/>
+        android:layout_marginRight="@dimen/spacing_normal_16"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_line_third"/>
 
     <TextView
+        android:id="@+id/tv_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv_skip"
         android:layout_marginLeft="@dimen/spacing_normal_16"
-        android:layout_marginRight="@dimen/spacing_normal_16" />
+        android:layout_marginRight="@dimen/spacing_normal_16"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_init_caption"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_checkboxes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal_16"
-        android:layout_marginBottom="@dimen/spacing_normal_16">
+        android:layout_marginBottom="@dimen/spacing_normal_16"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_skip">
 
         <CheckBox
             android:id="@+id/cb_readme"
@@ -252,7 +319,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/import_horizontal_grey_line" />
+    <View
+        android:id="@+id/v_line_fourth"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_light"
+        style="@style/HorizontalLine"
+        app:layout_constraintTop_toBottomOf="@id/cl_checkboxes"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_create"
@@ -266,6 +339,10 @@
         android:layout_marginLeft="@dimen/spacing_normal_16"
         android:layout_marginRight="@dimen/spacing_normal_16"
         android:layout_marginTop="@dimen/spacing_normal_16"
-        android:layout_marginBottom="@dimen/spacing_normal_16" />
+        android:layout_marginBottom="@dimen/spacing_normal_16"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_line_fourth"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

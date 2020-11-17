@@ -14,4 +14,11 @@
     <color name="red">#CB2431</color>
     <color name="blue">#0075ff</color>
     <color name="alice_blue">#EAF5FF</color>
+
+    <color name="input_stroke_error">#f97583</color>
+    <color name="input_fill_error">#ffffeef0</color>
+    <color name="input_text_error">#86181d</color>
+    <color name="input_stroke_ok">#74b281</color>
+    <color name="input_fill_ok">#FFdbffe3</color>
+    <color name="input_text_ok">#245031</color>
 </resources>

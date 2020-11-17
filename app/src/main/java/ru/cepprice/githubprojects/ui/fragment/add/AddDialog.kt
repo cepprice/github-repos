@@ -1,19 +1,17 @@
 package ru.cepprice.githubprojects.ui.fragment.add
 
-import android.content.res.ColorStateList
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import android.view.inputmethod.EditorInfo
 import android.widget.CompoundButton
+import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -22,6 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.cepprice.githubprojects.R
 import ru.cepprice.githubprojects.data.local.model.SendRepo
 import ru.cepprice.githubprojects.databinding.DialogAddBinding
+import ru.cepprice.githubprojects.extensions.getHtmlSpannedString
+import ru.cepprice.githubprojects.extensions.hideKeyboard
 import ru.cepprice.githubprojects.extensions.toRepoView
 import ru.cepprice.githubprojects.utils.Resource
 import ru.cepprice.githubprojects.utils.Utils
@@ -31,11 +31,8 @@ import java.io.Serializable
 @AndroidEntryPoint
 class AddDialog : BottomSheetDialogFragment(),
     CompoundButton.OnCheckedChangeListener,
-    View.OnClickListener
+    View.OnClickListener, View.OnFocusChangeListener, TextView.OnEditorActionListener
 {
-    // TODO 1: get list of user repos
-    // TODO 2: button inactive until repos' name == 0
-    //
     private val args: AddDialogArgs by navArgs()
     private val viewModel: AddViewModel by viewModels()
 
@@ -65,8 +62,6 @@ class AddDialog : BottomSheetDialogFragment(),
             cbReadme.setOnCheckedChangeListener(this@AddDialog)
             tvReadme.setOnClickListener(this@AddDialog)
             tvReadmeExplain.setOnClickListener(this@AddDialog)
-//            cbGitignore.setOnCheckedChangeListener(this@AddDialog)
-//            cbLicense.setOnCheckedChangeListener(this@AddDialog)
 
             // Cross image
             flIvCancel.setOnClickListener(this@AddDialog)
@@ -83,6 +78,9 @@ class AddDialog : BottomSheetDialogFragment(),
 
             // Add button
             btnCreate.setOnClickListener(this@AddDialog)
+
+            // Layout
+            binding.rootView.setOnClickListener(this@AddDialog)
         }
 
     }
@@ -98,6 +96,8 @@ class AddDialog : BottomSheetDialogFragment(),
             }
 
             binding.etRepoName.addTextChangedListener(getTextWatcher())
+            binding.etRepoName.setOnFocusChangeListener(this)
+            binding.etRepoName.setOnEditorActionListener(this)
         })
 
         viewModel.addRepoResult.observe(viewLifecycleOwner, { resource ->
@@ -131,41 +131,43 @@ class AddDialog : BottomSheetDialogFragment(),
         setVisibilityOfBranchMessage(isChecked)
     }
 
-    override fun onClick(view: View?): Unit = with(binding) { when(view) {
-        flIvCancel -> findNavController().navigateUp()
+    override fun onClick(view: View?): Unit = with(binding) {
+        if (view != etRepoName) setInputOkVisibility(false)
+        when(view) {
+            flIvCancel -> findNavController().navigateUp()
 
-        rbPublic, ivPublic, tvPublic, tvPublicExplain -> {
-            rbPrivate.isChecked = false
-            rbPublic.isChecked = true
-        }
-
-        rbPrivate, ivPrivate, tvPrivate, tvPrivateExplain -> {
-            rbPublic.isChecked = false
-            rbPrivate.isChecked = true
-        }
-
-        tvReadme, tvReadmeExplain -> {
-            if (cbReadme.isChecked) {
-                setVisibilityOfBranchMessage(false)
-                cbReadme.isChecked = false
-            } else {
-                setVisibilityOfBranchMessage(true)
-                cbReadme.isChecked = true
+            rbPublic, ivPublic, tvPublic, tvPublicExplain -> {
+                rbPrivate.isChecked = false
+                rbPublic.isChecked = true
             }
-        }
 
-        // TODO add license and gitignore template
-        btnCreate -> {
-            setButtonClickable(false)
-            repoToSend = SendRepo(
-                etRepoName.text.toString(),
-                rbPrivate.isChecked,
-                cbReadme.isChecked
-            )
-            viewModel.createRepo(repoToSend!!)
-        }
+            rbPrivate, ivPrivate, tvPrivate, tvPrivateExplain -> {
+                rbPublic.isChecked = false
+                rbPrivate.isChecked = true
+            }
 
-        else -> Log.d("M_AddDialog", "Click on ${view?.id} is not handled")
+            tvReadme, tvReadmeExplain -> {
+                if (cbReadme.isChecked) {
+                    setVisibilityOfBranchMessage(false)
+                    cbReadme.isChecked = false
+                } else {
+                    setVisibilityOfBranchMessage(true)
+                    cbReadme.isChecked = true
+                }
+            }
+
+            // TODO add license and gitignore template
+            btnCreate -> {
+                setButtonClickable(false)
+                repoToSend = SendRepo(
+                    etRepoName.text.toString(),
+                    rbPrivate.isChecked,
+                    cbReadme.isChecked
+                )
+                viewModel.createRepo(repoToSend!!)
+            }
+
+            else -> Log.d("M_AddDialog", "Click on ${view?.id} is not handled")
     }}
 
     // For EditText with repo name
@@ -175,27 +177,84 @@ class AddDialog : BottomSheetDialogFragment(),
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             val repoName = p0.toString()
-            if (repoName.isBlank()) return
+            if (repoName.isBlank()) {
+                setInputOkVisibility(false)
+                setInputErrorVisibility(false)
+                return
+            }
 
             val isNameFree = !viewModel.repos.value!!.data!!.map { it.name }.contains(repoName)
 
             if (!isNameFree) {
-                binding.etRepoName.error = "The repository $repoName already exists on this account.\n"
+                binding.tvInputError.text = resources.getHtmlSpannedString(
+                    R.string.tv_error_duplicate_name, repoName
+                )
+                setInputOkVisibility(false)
+                setInputErrorVisibility(true)
                 setButtonClickable(false)
                 return
             }
 
             if (!Utils.isRepoNameValid(repoName)) {
-                binding.etRepoName.error = "Only english letters, digits, underscore and dash allowed"
+                binding.tvInputError.text = resources.getString(R.string.tv_error_forbidden_symbol)
+                setInputOkVisibility(false)
+                setInputErrorVisibility(true)
                 setButtonClickable(false)
                 return
             }
 
+            setInputErrorVisibility(false)
+            binding.tvInputOk.text = resources.getHtmlSpannedString(
+                R.string.tv_input_ok, repoName
+            )
+
+            setInputOkVisibility(true)
             setButtonClickable(true)
 
         }
 
         override fun afterTextChanged(p0: Editable?) {
+        }
+    }
+
+    override fun onFocusChange(p0: View?, hasFocus: Boolean) {
+        // TODO is it needed?
+        if (p0 == binding.etRepoName && !hasFocus) {
+            setInputOkVisibility(false)
+        }
+    }
+
+    override fun onEditorAction(p0: TextView?, actionId: Int, p2: KeyEvent?): Boolean {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            setInputOkVisibility(false)
+            hideKeyboard()
+            binding.etRepoName.clearFocus()
+            return true
+        }
+        return false
+    }
+
+    private fun setInputOkVisibility(isVisible: Boolean) {
+        with(binding) {
+            if (isVisible) {
+                tvInputOk.visibility = View.VISIBLE
+                ivInputArrowOk.visibility = View.VISIBLE
+            } else {
+                tvInputOk.visibility = View.GONE
+                ivInputArrowOk.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun setInputErrorVisibility(isVisible: Boolean) {
+        with(binding) {
+            if (isVisible) {
+                tvInputError.visibility = View.VISIBLE
+                ivInputArrowError.visibility = View.VISIBLE
+            } else {
+                tvInputError.visibility = View.GONE
+                ivInputArrowError.visibility = View.GONE
+            }
         }
     }
 
