@@ -78,7 +78,6 @@
         android:textSize="@dimen/font_default_14"
         android:lines="1"
         android:textColor="@color/black"
-        style="@style/EditTextTheme"
         android:textCursorDrawable="@null"
         android:background="@drawable/border_white_round_8"
         android:inputType="textNoSuggestions|textShortMessage"
