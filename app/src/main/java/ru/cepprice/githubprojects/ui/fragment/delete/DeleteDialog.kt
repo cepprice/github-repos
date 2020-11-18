@@ -58,6 +58,7 @@ class DeleteDialog
 
         binding.flIvCancel.setOnClickListener(this)
         binding.btnDelete.setOnClickListener(this)
+        binding.btnDelete.isClickable = false
 
         setupObservers()
     }
